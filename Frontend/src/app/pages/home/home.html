@@ -1,0 +1,76 @@
+<!-- NAVBAR -->
+<div class="navbar">
+
+  <div class="logo">🛒 E-Store</div>
+
+  <input type="text" placeholder="Search products..." class="search">
+
+  <div class="nav-right">
+    <ng-container *ngIf = "!loggedUser">
+        <button routerLink = "/login">Login</button>
+        <button routerLink = "/signup">Signup</button>
+    </ng-container>
+
+    <ng-container *ngIf = "loggedUser">
+        <span> {{loggedUser.username}} </span>
+        <button (click) = "logout()"> Logout </button>
+    </ng-container>
+
+    <button (click) = "goToCart()"> 🛒 Cart </button>
+  </div>
+
+</div>
+
+<!-- HERO BANNER -->
+<div class="banner">
+  <h1>Discover Latest Tech</h1>
+  <p>Best deals on electronics </p>
+</div>
+
+<!-- PRODUCT GRID -->
+<div class="products">
+
+  <div class="product-card" *ngFor = "let product of pagedProducts">
+
+    <img [src] = "product.imageUrl" class="product-img"/>
+
+    <h3>{{product.name}}</h3>
+
+    <!-- <p class="desc">{{product.description}}</p> -->
+
+    <p class="price">₹ {{product.price}}</p>
+
+    <div class="cart-stock">
+      <button 
+        class="cart-btn"
+        [disabled]="product.stock === 0"
+        (click) = "addToCart(product.id)">
+        Add to Cart
+      </button>
+
+      <div class="stock">
+        <span *ngIf = "product.stock > 0">
+          Stock: {{ product.stock }}
+        </span>
+
+        <span *ngIf = "product.stock === 0" class="out">
+          Out of Stock
+        </span>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="pagination">
+
+  <button (click) = "prevPage()">Previous</button>
+
+  <span>Page {{currentPage}} of {{totalPages}}</span>
+
+  <button (click) = "nextPage()">Next</button>
+
+</div>
+
+
+</div>

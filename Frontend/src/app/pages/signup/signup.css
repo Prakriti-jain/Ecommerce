@@ -1,0 +1,101 @@
+/* BACKGROUND */
+
+.signup-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(120deg, rgb(238, 205, 210), rgb(230, 230, 170));
+}
+
+/* CARD */
+
+.signup-box {
+  width: 420px;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  background: rgb(227, 209, 178);
+  border: 2px solid #1f4037;
+}
+
+/* TITLE */
+
+.signup-card h2 {
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 13px;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* FORM */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+label {
+  font-size: 13px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+input, select, textarea {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #1f4037;
+}
+
+/* BUTTON */
+
+.signup-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: #1f4037;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.signup-btn:hover {
+  background: #16322c;
+}
+
+/* ERROR */
+
+.error {
+  color: red;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* LOGIN LINK */
+
+.login-link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 15px;
+}
+
+.login-link span {
+  color: #1f4037;
+  font-weight: bold;
+  cursor: pointer;
+}

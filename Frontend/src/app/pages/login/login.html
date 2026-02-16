@@ -1,0 +1,49 @@
+<div class="login-container">
+
+  <div class="login-box">
+
+    <div class="role-toggle">
+      <button 
+        [class.active] = "selectedRole === 'USER'"
+        (click) = "switchRole('USER')">User</button>
+
+      <button 
+        [class.active] = "selectedRole ==='ADMIN'"
+        (click) = "switchRole('ADMIN')">Admin</button>
+    </div>
+
+    <div class = "inputBox">
+
+      <h2>{{selectedRole}} Login</h2>
+
+      <form [formGroup] = "loginForm" (ngSubmit) = "login()">
+
+        <input type="text" placeholder="Username" formControlName="username">
+        <input type="password" placeholder="Password" formControlName="password">
+
+        <button type="submit">Login</button>
+      </form>
+
+      </div>
+
+
+      <!-- SIGNUP BUTTON -->
+      <div class="signup-section">
+        <p>Don't have an account?</p>
+        <button (click) = "signup()">Signup</button>
+      </div>
+
+
+    <!-- ERROR -->
+    <p class="error" *ngIf = "errorMessage" >
+      {{errorMessage}}
+    </p>
+
+    <!-- SUCCESS -->
+    <div class="success" *ngIf = "loggedUser">
+      Welcome {{loggedUser.username}} ({{loggedUser.role}})
+    </div>
+
+  </div>
+
+</div>

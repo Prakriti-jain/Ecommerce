@@ -1,0 +1,86 @@
+.login-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(120deg, rgb(238, 205, 210), rgb(230, 230, 170));
+}
+
+.login-box {
+  width: 500px;
+  padding: 30px;
+  background: rgb(227, 209, 178);
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  text-align: center;
+  border: 2px solid #1f4037;
+  
+}
+
+.role-toggle {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.role-toggle button {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: #eee;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.role-toggle .active {
+  background: #1f4037;
+  color: white;
+  font-weight: bold;
+}
+
+.inputBox {
+  text-align: center;
+  padding: 10px 10px 10px 10px;
+}
+
+input {
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px 10px 10px;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background: #1f4037;
+  color: white;
+  border: none;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+.success {
+  margin-top: 15px;
+  color: green;
+  font-weight: bold;
+}
+.signup-section {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.signup-section button {
+  background: #1f4037;
+  color:white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}
