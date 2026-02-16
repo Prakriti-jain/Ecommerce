@@ -1,0 +1,89 @@
+### add admin to users table
+POST http://localhost:8080/auth/signup
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123",
+  "role": "ADMIN"
+}
+
+### add user to users table
+POST http://localhost:8080/auth/signup
+Content-Type: application/json
+
+{
+"username": "prakriti",
+"password": "1234",
+"role": "USER"
+}
+
+
+### checking login of admin
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+"username": "admin",
+"password": "123"
+}
+
+### checking login of user
+POST http://localhost:8080/auth/login
+Content-Type: application/json
+
+{
+  "username": "prakriti",
+  "password": "1234"
+}
+
+
+### add product to the inventory
+POST http://localhost:8080/products
+Content-Type: application/json
+
+{
+"name": "iPhone 17",
+"description": "Apple phone",
+"price": 100000,
+"stock": 10,
+"available": true,
+  "imageUrl" : "https://picsum.photos/seed/mouse/400/300"
+}
+
+### get all products from inventory
+GET http://localhost:8080/products
+
+### delete a product from inventory
+DELETE http://localhost:8080/products/1
+
+### update product in inventory
+PUT http://localhost:8080/products/1
+Content-Type: application/json
+
+{
+  "name": "iPhone 15 Pro",
+  "description": "Updated model",
+  "price": 90000,
+  "stock": 5,
+  "available": true
+}
+
+### add item to cart
+POST http://localhost:8080/cart/add
+Content-Type: application/json
+
+{
+  "userId": 2,
+  "productId": 2,
+  "quantity": 2
+}
+
+
+### get cart items of the user id
+GET http://localhost:8080/cart/2
+
+### delete from cart with given item id
+DELETE http://localhost:8080/cart/item/2
+
+
