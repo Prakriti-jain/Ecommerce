@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NgFor, NgIf } from '@angular/common';
 import { ProductService } from '../../services/product';
 import { Product } from '../../models/product.model';
@@ -21,7 +21,7 @@ export class Home implements OnInit {
   // Applying pagination
   pagedProducts:any[] = [];
   currentPage:number = 1;
-  itemsPerPage:number = 8;
+  itemsPerPage:number = 10;
   totalPages:number = 0;
 
   loggedUser:any;
@@ -38,6 +38,8 @@ export class Home implements OnInit {
       this.updatePageProducts();
       this.cd.detectChanges();
     });
+
+    this.loadCartCount();
   }
 
   updatePageProducts() {
@@ -72,6 +74,7 @@ prevPage(){
     this.cartService.addToCart(userId, productId,1).subscribe({
       next:(res) => {
         alert("Product added to cart");
+        this.loadCartCount();
       },
       error:(err) => {
         alert("Error adding to cart");
@@ -81,5 +84,28 @@ prevPage(){
 
   goToCart() {
     this.router.navigate(['/cart']);
+  }
+
+  showProfileMenu : boolean = false
+
+  toggleProfileMenu() {
+    this.showProfileMenu = !this.showProfileMenu;
+  }
+
+  cartCount:number = 0;
+
+  loadCartCount(){
+
+    const user = this.authService.getUser();
+    if(!user) return;
+
+    this.cartService.getCartCount(user.id).subscribe((res:any)=>{
+      this.cartCount = res.cartItems.length;
+      this.cd.detectChanges();
+    });
+  }
+
+  goToProduct(id : number) {
+    this.router.navigate(['/products', id])
   }
 }

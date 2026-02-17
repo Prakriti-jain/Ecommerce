@@ -6,20 +6,43 @@
   <input type="text" placeholder="Search products..." class="search">
 
   <div class="nav-right">
+
+    <!-- NOT LOGGED IN -->
     <ng-container *ngIf = "!loggedUser">
-        <button routerLink = "/login">Login</button>
-        <button routerLink = "/signup">Signup</button>
+
+      <button routerLink="/login">Login</button>
+      <button routerLink="/signup">Signup</button>
+
     </ng-container>
 
+    <!-- LOGGED IN -->
     <ng-container *ngIf = "loggedUser">
-        <span> {{loggedUser.username}} </span>
-        <button (click) = "logout()"> Logout </button>
+
+      <div class="profile" (click) = "toggleProfileMenu()">
+        👤 {{loggedUser.username}}
+
+        <div class="dropdown" *ngIf = "showProfileMenu">
+
+          <button routerLink="/profile">View Profile</button>
+          <button routerLink="/profile/update">Update Profile</button>
+          <button routerLink="/orders">My Orders</button>
+
+
+          <button class="logout-btn" (click) = "logout()">Logout</button>
+
+        </div>
+      </div>
+
     </ng-container>
 
-    <button (click) = "goToCart()"> 🛒 Cart </button>
+    <button (click) = "goToCart()" class = "cart-btn-user"> 🛒 Cart 
+      <span class = "cart-btn-badge" *ngIf = "cartCount>0"> {{cartCount}} </span>
+    </button>
+
   </div>
 
 </div>
+
 
 <!-- HERO BANNER -->
 <div class="banner">
@@ -30,7 +53,7 @@
 <!-- PRODUCT GRID -->
 <div class="products">
 
-  <div class="product-card" *ngFor = "let product of pagedProducts">
+  <div class="product-card"  *ngFor = "let product of pagedProducts" (click) = "goToProduct(product.id)">
 
     <img [src] = "product.imageUrl" class="product-img"/>
 
@@ -43,7 +66,7 @@
     <div class="cart-stock">
       <button 
         class="cart-btn"
-        [disabled]="product.stock === 0"
+        [disabled] = "product.stock === 0"
         (click) = "addToCart(product.id)">
         Add to Cart
       </button>

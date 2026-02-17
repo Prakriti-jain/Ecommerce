@@ -1,3 +1,4 @@
+<app-page-header> </app-page-header>
 <div class="cart-page">
 
   <h2>Your Shopping Cart 🛒</h2>
@@ -40,7 +41,7 @@
 
   <div class="total-box" *ngIf ="cartItems.length > 0">
     <h2>Total: ₹ {{totalAmount}}</h2>
-    <button class="checkout-btn">Proceed to Checkout</button>
+    <button class="checkout-btn" (click) = "placeOrder()">Proceed to Checkout</button>
   </div>
 
 </div>

@@ -36,4 +36,9 @@ export class AuthService {
   signup(data : any) {
     return this.http.post('http://localhost:8080/auth/signup', data);
   }
+
+  updateProfile(userId:number,data:any){
+  return this.http.put(`http://localhost:8080/auth/update/${userId}`,data);
+}
+
 }

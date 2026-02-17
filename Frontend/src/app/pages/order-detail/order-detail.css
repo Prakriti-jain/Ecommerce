@@ -1,0 +1,42 @@
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 40px;
+  background:#0f172a;
+  color:white;
+}
+
+.logo {
+  font-size:22px;
+  font-weight:bold;
+}
+
+.order-container{
+  width:70%;
+  margin:auto;
+}
+
+.order-info{
+  background:#f8f8f8;
+  padding:15px;
+  border-radius:10px;
+  margin-bottom:20px;
+}
+
+.item-card{
+  display:flex;
+  gap:20px;
+  background:white;
+  padding:20px;
+  margin:20px 0;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.product-img{
+  width:120px;
+  height:120px;
+  object-fit:cover;
+  border-radius:10px;
+}

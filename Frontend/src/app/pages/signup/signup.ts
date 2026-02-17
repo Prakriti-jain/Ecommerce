@@ -4,12 +4,13 @@ import { AuthService } from '../../services/auth';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.html',
   styleUrls: ['./signup.css'], 
-  imports: [ ReactiveFormsModule,NgIf ] 
+  imports: [ ReactiveFormsModule,NgIf , RouterLink] 
 })
 export class SignupComponent {
 

@@ -1,0 +1,30 @@
+<app-page-header></app-page-header>
+
+<div class="update-wrapper">
+
+  <div class="form-card">
+
+    <h1>Update Profile</h1>
+
+    <form [formGroup] = "form" (ngSubmit) = "update()">
+
+      <div class="row">
+        <input formControlName="name" placeholder="Full Name">
+        <input formControlName="phone" placeholder="Phone Number">
+      </div>
+
+      <div class="row">
+        <input formControlName="gender" placeholder="Gender">
+        <input formControlName="dob" type="date">
+      </div>
+
+      <textarea formControlName="address" placeholder="Address"></textarea>
+
+      <button type="submit">Save Changes</button>
+
+    </form>
+
+  </div>
+
+</div>
+

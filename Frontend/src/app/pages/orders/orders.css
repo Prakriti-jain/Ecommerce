@@ -1,0 +1,26 @@
+.orders-container{
+  width:70%;
+  padding: 20px;
+  margin:auto;
+}
+
+.order-card{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:white;
+  padding:20px;
+  margin:20px 0;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.amount{
+  font-size:18px;
+  font-weight:bold;
+}
+
+.status{
+  color:green;
+  margin-bottom:10px;
+}

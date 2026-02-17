@@ -2,10 +2,13 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Cart } from '../../services/cart';
 import { NgFor, NgIf} from '@angular/common';
 import { AuthService } from '../../services/auth';
+import { Order } from '../../services/order';
+import { Router } from '@angular/router';
+import { PageHeader } from "../../shared/page-header/page-header";
 
 @Component({
   selector: 'app-cart',
-  imports: [NgFor, NgIf],
+  imports: [NgFor, NgIf, PageHeader],
   templateUrl: './cart.html',
   styleUrl: './cart.css',
 })
@@ -14,7 +17,7 @@ export class CartComponent implements OnInit {
   loggedUser:any;
   userId:any ; 
 
-  constructor(private authService: AuthService, private cartService:Cart, private cd : ChangeDetectorRef){}
+  constructor(private router :Router, private authService: AuthService, private cartService:Cart, private orderService : Order, private cd : ChangeDetectorRef){}
 
   ngOnInit(){
     this.loggedUser = this.authService.getUser();
@@ -73,4 +76,25 @@ calculateTotal(){
       this.loadCart();
     })
   }
+
+  placeOrder() {
+    const user = this.authService.getUser();
+    if(!user) {
+      alert('Login First!');
+      return;
+    }
+
+    this.orderService.placeOrder(this.userId).subscribe({
+      next:(res) => {
+        alert("Order placed successfully!");
+        this.loadCart(); //cart empty
+        this.router.navigate(['./order-success']);
+      },
+      error: (err) => {
+        alert("Order failed!");
+      }
+    });
+  }
+
+  
 }

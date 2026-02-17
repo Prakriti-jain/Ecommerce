@@ -1,0 +1,28 @@
+<app-page-header> </app-page-header>
+<div class="orders-container">
+
+  <h1>My Orders</h1>
+
+  <div *ngIf="orders.length === 0" class="empty">
+    No orders placed yet.
+  </div>
+
+  <div class="order-card" *ngFor="let order of orders">
+
+    <div class="left">
+      <h3>Order #{{order.id}}</h3>
+      <p>{{order.orderDate}}</p>
+    </div>
+
+    <div class="right">
+      <p class="amount">₹ {{order.totalAmount}}</p>
+      <p class="status">{{order.status}}</p>
+
+      <button [routerLink] = "['/order',order.id]">
+        View Details
+      </button>
+    </div>
+
+  </div>
+
+</div>
