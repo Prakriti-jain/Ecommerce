@@ -26,4 +26,11 @@ public class AuthController {
     public User signup(@RequestBody User user) {
         return service.register(user);
     }
+
+    @PutMapping("/update/{id}")
+    public User updateUser(@PathVariable Long id, @RequestBody User updated){
+
+        return service.updateUser(id, updated);
+    }
+
 }

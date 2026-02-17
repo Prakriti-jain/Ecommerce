@@ -4,6 +4,9 @@ import org.example.ecom.model.User;
 import org.example.ecom.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class UserService {
@@ -32,4 +35,17 @@ public class UserService {
         }
         return user;
     }
+
+    public User updateUser(Long id, User updated){
+        User user = repo.findById(id).get();
+
+        user.setName(updated.getName());
+        user.setPhone(updated.getPhone());
+        user.setAddress(updated.getAddress());
+        user.setGender(updated.getGender());
+        user.setDob(updated.getDob());
+
+        return repo.save(user);
+    }
+
 }

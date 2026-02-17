@@ -37,6 +37,19 @@ Content-Type: application/json
   "password": "1234"
 }
 
+### update user detail
+PUT http://localhost:8080/auth/update/2
+Content-Type: application/json
+
+{
+  "name": "Prakriti Jain",
+  "gender": "Female",
+  "dob": "2005-04-22",
+  "phone": "9876543210",
+  "address": "Gurgaon"
+}
+
+
 
 ### add product to the inventory
 POST http://localhost:8080/products
@@ -69,6 +82,9 @@ Content-Type: application/json
   "available": true
 }
 
+###
+GET http://localhost:8080/products/7
+
 ### add item to cart
 POST http://localhost:8080/cart/add
 Content-Type: application/json
@@ -85,5 +101,14 @@ GET http://localhost:8080/cart/2
 
 ### delete from cart with given item id
 DELETE http://localhost:8080/cart/item/2
+
+### place order of given userid
+POST http://localhost:8080/orders/place/2
+
+### get orders of the user
+GET http://localhost:8080/orders/user/2
+
+### get order details
+GET http://localhost:8080/orders/1
 
 
