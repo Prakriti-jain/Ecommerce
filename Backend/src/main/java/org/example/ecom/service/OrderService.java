@@ -52,6 +52,9 @@ public class OrderService {
 
             //reduce stock
             Product product = item.getProduct();
+            if (product.getStock() < item.getQuantity()) {
+                throw new RuntimeException("Not enough stock for product " + product.getName());
+            }
             product.setStock(product.getStock() - item.getQuantity());
             productRepo.save(product);
         }
