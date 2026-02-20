@@ -11,7 +11,13 @@ export class AuthService {
   private baseUrl = 'http://localhost:8080/auth'; //springboot url
   private currentUser : User | null = null;
 
-  constructor(private http : HttpClient) {}
+  constructor(private http : HttpClient) {
+    //app start hone par user restore
+    const savedUser = localStorage.getItem('user');
+    if(savedUser) {
+      this.currentUser = JSON.parse(savedUser);
+    }
+  }
 
   login(data:LoginRequest) : Observable<User> {
     return this.http.post<User>(`${this.baseUrl}/login`, data);
@@ -19,14 +25,16 @@ export class AuthService {
 
   setUser(user : User) {
     this.currentUser = user;
+    localStorage.setItem('user', JSON.stringify(user));
   }
 
-  getUser() {
+  getUser(){
     return this.currentUser;
   }
 
   logout() {
     this.currentUser = null;
+    localStorage.removeItem('user');
   }
 
   isLogged(){

@@ -3,7 +3,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(120deg, rgb(238, 205, 210), rgb(230, 230, 170));
+  /* background: linear-gradient(120deg, rgb(238, 205, 210), rgb(230, 230, 170)); */
+  background: #0f172a;
 }
 
 .login-box {
@@ -49,6 +50,13 @@ input {
   padding: 10px 10px 10px;
   border-radius: 6px;
   box-sizing: border-box;
+}
+
+.error-form{
+  color: crimson;
+  font-size: small;
+  text-align: left;
+  margin-top: 1px;
 }
 
 button[type="submit"] {

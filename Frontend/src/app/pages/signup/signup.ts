@@ -22,19 +22,22 @@ export class SignupComponent {
               private router:Router){
 
     this.signupForm = this.fb.group({
-      name:['', Validators.required],
+      name:['', [Validators.required, Validators.minLength(3), Validators.pattern('^[a-zA-Z ]+$')]],
       dob:['', Validators.required],
       gender:['', Validators.required],
-      username:['', Validators.required],
-      password:['', Validators.required],
+      username:['', [Validators.required, Validators.minLength(4), Validators.maxLength(20), , Validators.pattern('^[a-zA-Z0-9]+$')]],
+      password:['', [Validators.required, Validators.minLength(8), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])$')]],
       address:['', Validators.required],
-      phone:['']
+      phone:['', Validators.pattern('^\\d{10}$')]
     });
   }
 
   signup() {
 
-    if(this.signupForm.invalid) return;
+    if(this.signupForm.invalid) {
+      this.signupForm.markAllAsTouched();
+      return;
+    }
 
     const payload = {
       ...this.signupForm.value,

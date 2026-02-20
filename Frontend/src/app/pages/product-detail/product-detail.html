@@ -5,24 +5,24 @@
   <!-- LEFT: IMAGE -->
   <div class="image-section">
 
-    <img [src]="product.imageUrl" class="main-img">
+    <img [src] = "product.imageUrl" class="main-img">
 
 
   </div>
 
   <!-- RIGHT: DETAILS -->
-  <div class="details-section">
+  <div class = "details-section">
 
-    <h1 class="product-title">{{product.name}}</h1>
+    <h1 class = "product-title">{{product.name}}</h1>
 
-    <div class="rating">
+    <div class = "rating">
       ⭐⭐⭐⭐☆ <span>(120 reviews)</span>
     </div>
 
-    <p class="price">₹ {{product.price}}</p>
+    <p class = "price">₹ {{product.price}}</p>
 
-    <p class="stock"
-       [class.out]="product.stock === 0">
+    <p class = "stock"
+       [class.out] = "product.stock === 0">
        {{ product.stock > 0 ? 'In Stock' : 'Out of Stock' }}
     </p>
 
@@ -34,9 +34,9 @@
       <span>Quantity</span>
 
       <div class="qty-box">
-        <button (click)="decrease()">-</button>
+        <button (click) = "decrease()">-</button>
         <span>{{quantity}}</span>
-        <button (click)="increase()">+</button>
+        <button (click) = "increase()">+</button>
       </div>
 
     </div>
@@ -45,7 +45,7 @@
     <div class="actions">
 
       <button class="cart-btn"
-              (click)="addToCart()"
+              (click) = "addToCart()"
               [disabled]="product.stock===0">
         Add to Cart
       </button>
@@ -56,7 +56,7 @@
 
     </div>
 
-    <span class="added" *ngIf="added">✔ Added to cart</span>
+    <span class="added" *ngIf = "added">✔ Added to cart</span>
 
   </div>
 

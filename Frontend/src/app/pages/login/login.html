@@ -19,7 +19,20 @@
       <form [formGroup] = "loginForm" (ngSubmit) = "login()">
 
         <input type="text" placeholder="Username" formControlName="username">
+        <div class = "error-form" *ngIf = "loginForm.get('username')?.invalid && (loginForm.get('username')?.touched || loginForm.get('username')?.dirty)">
+          <span>
+            Username is required
+          </span>
+
+        </div>
+
         <input type="password" placeholder="Password" formControlName="password">
+        <div class = "error-form" *ngIf = "loginForm.get('password')?.invalid && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)">
+          <span>
+            Password is required
+          </span>
+
+        </div>
 
         <button type="submit">Login</button>
       </form>

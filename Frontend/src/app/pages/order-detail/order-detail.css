@@ -40,3 +40,8 @@
   object-fit:cover;
   border-radius:10px;
 }
+
+.page {
+  background: rgb(227, 209, 178);
+  min-height: 100vh;
+}

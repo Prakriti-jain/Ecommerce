@@ -1,17 +1,19 @@
 /* BACKGROUND */
 
 .signup-container {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(120deg, rgb(238, 205, 210), rgb(230, 230, 170));
+  /* background: linear-gradient(120deg, rgb(238, 205, 210), rgb(230, 230, 170)); */
+  background: #0f172a;
+  padding: 20px 0px;
 }
 
 /* CARD */
 
 .signup-box {
-  width: 420px;
+  width: 500px;
   background: white;
   padding: 30px;
   border-radius: 12px;
@@ -22,9 +24,9 @@
 
 /* TITLE */
 
-.signup-card h2 {
+
+.signup-box h2 {
   text-align: center;
-  margin-bottom: 5px;
 }
 
 .subtitle {
@@ -42,6 +44,14 @@
   margin-bottom: 15px;
 }
 
+.form-row {
+  display: flex;
+  gap: 15px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
 label {
   font-size: 13px;
   margin-bottom: 5px;
@@ -58,6 +68,12 @@ input, select, textarea {
 
 input:focus, textarea:focus, select:focus {
   border-color: #1f4037;
+}
+
+.error-form{
+  color: crimson;
+  margin-top: 4px;
+  font-size: small;
 }
 
 /* BUTTON */

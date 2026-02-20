@@ -44,6 +44,11 @@ loadCart() {
 }
 
 increaseQty(item:any){
+  // if(item.quantity >= item.product.stock){
+  //   alert("Only " + item.product.stock + " items available");
+  //   return;
+  // }
+
   item.quantity++;
 
   this.cartService.updateQuantity(item.id,item.quantity).subscribe(()=>{
@@ -84,16 +89,8 @@ calculateTotal(){
       return;
     }
 
-    this.orderService.placeOrder(this.userId).subscribe({
-      next:(res) => {
-        alert("Order placed successfully!");
-        this.loadCart(); //cart empty
-        this.router.navigate(['./order-success']);
-      },
-      error: (err) => {
-        alert("Order failed!");
-      }
-    });
+    this.router.navigate(['./payment']);
+    // this.loadCart(); //cart empty
   }
 
   

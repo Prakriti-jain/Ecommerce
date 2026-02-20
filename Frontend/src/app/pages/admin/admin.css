@@ -1,0 +1,60 @@
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:12px 40px;
+  background:#0f172a;
+  color:white;
+}
+
+.logo {
+  font-size:22px;
+  font-weight:bold;
+}
+
+.profile{
+  /* position:relative; */
+  cursor:pointer;
+  /* font-weight:500; */
+}
+
+.dropdown{
+  position:absolute;
+  right: 100px;
+  background: white;
+  border-radius:10px;
+  box-shadow:0 6px 15px rgba(0,0,0,0.15);
+  padding:10px;
+  display:flex;
+  flex-direction:column;
+  min-width:100px;
+}
+
+.dropdown button{
+  background:none;
+  border:none;
+  padding:5px;
+  text-align:center;
+  cursor:pointer;
+  border-radius: 7px;
+}
+
+.dropdown :hover {
+    background: #ff9800;
+}
+
+.banner {
+  background-color: #1f4037;
+  padding:60px;
+  text-align:center;
+  color:white;
+}
+
+.loginbtn button {
+  padding:8px 14px;
+  border:none;
+  background:#ff9800;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+}

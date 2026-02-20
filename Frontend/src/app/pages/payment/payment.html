@@ -1,0 +1,42 @@
+<div class = "page">
+<app-page-header> </app-page-header>
+<div class = "payment-wrapper"> 
+    <div class = "left">
+        <h2> Payment Method </h2>
+        <div class = "methods"> 
+            <label> 
+                <input type = "radio" name = "pay" [(ngModel)] = "method" value = "UPI">
+                UPI
+            </label>
+
+            <label>
+                <input type="radio" name="pay" [(ngModel)] = "method" value="CARD">
+                Credit/Debit Card
+            </label>
+
+            <label>
+                <input type="radio" name="pay" [(ngModel)] = "method" value="COD">
+                Cash on Delivery
+            </label>
+        </div>
+
+        <button (click) = "payNow()" >Pay Now</button>
+    </div>
+
+    <div class = "right">
+
+        <h3> Order Summary</h3>
+        <div *ngFor = "let item of cartItems" class="summary-item">
+            <span>{{item.product.name}}</span>
+            <span>₹{{item.product.price}} x {{item.quantity}}</span>
+        </div>
+
+        <hr>
+
+        <h2>Total: ₹{{totalAmount}}</h2>
+    </div>
+
+
+</div>
+</div>
+

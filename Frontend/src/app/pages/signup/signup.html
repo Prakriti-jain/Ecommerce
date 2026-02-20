@@ -9,48 +9,96 @@
       <div class="form-group">
         <label>Full Name</label>
         <input type="text" formControlName="name">
+        <div class = "error-form" *ngIf = "signupForm.get('name')?.invalid && (signupForm.get('name')?.touched || signupForm.get('name')?.dirty)"> 
+          <span *ngIf = "signupForm.get('name')?.errors?.['required']">
+            Name is required
+          </span>
+
+          <span *ngIf = "signupForm.get('name')?.errors?.['minlength']">
+            Name should be atleast 3 characters long
+          </span>
+
+          <span *ngIf = "signupForm.get('name')?.errors?.['pattern']">
+            Invalid Name!
+          </span>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Date of Birth</label>
-        <input type="date" formControlName="dob">
+      <div class = "form-row">
+        <div class="form-group">
+          <label>Date of Birth</label>
+          <input type="date" formControlName="dob">
+          <div class = "error-form" *ngIf = "signupForm.get('dob')?.invalid && (signupForm.get('dob')?.touched || signupForm.get('dob')?.dirty)"> 
+            DOB is required
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+          <select formControlName="gender">
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+
+          <div class = "error-form" *ngIf = "signupForm.get('gender')?.invalid && (signupForm.get('gender')?.touched || signupForm.get('gender')?.dirty)"> 
+            Select Gender
+          </div>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label>Gender</label>
-        <select formControlName="gender">
-          <option value="">Select</option>
-          <option>Male</option>
-          <option>Female</option>
-          <option>Other</option>
-        </select>
-      </div>
+
 
       <div class="form-group">
         <label>Username</label>
         <input type="text" formControlName="username">
+        <div class = "error-form" *ngIf = "signupForm.get('username')?.invalid && (signupForm.get('username')?.touched || signupForm.get('username')?.dirty)"> 
+          <span *ngIf = "signupForm.get('username')?.errors?.['required']">
+            Username is required
+          </span>
+
+          <span *ngIf = "signupForm.get('username')?.errors?.['minlength']">
+            Name should be atleast 4 characters long
+          </span>
+
+          <span *ngIf = "signupForm.get('username')?.errors?.['pattern']">
+            Invalid Username! Only Letters and Numbers allowed
+          </span>
+        </div>
       </div>
 
       <div class="form-group">
         <label>Password</label>
         <input type="password" formControlName="password">
+        <div class="error-form" *ngIf = "signupForm.get('password')?.invalid && (signupForm.get('password')?.touched || signupForm.get('password')?.dirty)">
+          <span *ngIf = "signupForm.get('password')?.errors?.['required']">Password required</span>
+          <span *ngIf = "signupForm.get('password')?.errors?.['minlength']">Min 8 characters</span>
+          <span *ngIf = "signupForm.get('password')?.errors?.['pattern']">Should contain atleast one lowercase, uppercase, digit, special character </span>
+        </div>
       </div>
 
       <div class="form-group">
         <label>Address</label>
         <textarea formControlName="address"></textarea>
+        <div class = "error-form" *ngIf = "signupForm.get('address')?.invalid && (signupForm.get('address')?.touched || signupForm.get('address')?.dirty)">
+          Address is required
+        </div>
       </div>
 
       <div class="form-group">
         <label>Phone</label>
         <input type="text" formControlName="phone">
+        <div class = "error-form" *ngIf ="signupForm.get('phone')?.invalid && (signupForm.get('phone')?.touched || signupForm.get('phone')?.dirty)">
+          Enter valid 10 digit number
+        </div>
       </div>
 
       <button class="signup-btn" type="submit">Create Account</button>
 
     </form>
 
-    <p class="error" *ngIf="errorMessage">
+    <p class="error" *ngIf = "errorMessage">
       {{errorMessage}}
     </p>
 

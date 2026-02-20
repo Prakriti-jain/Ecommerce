@@ -3,7 +3,15 @@
 
   <div class="logo">🛒 E-Store</div>
 
-  <input type="text" placeholder="Search products..." class="search">
+  <div class = "top-bar">
+    <input type = "text" placeholder="Search products..." class = "search" (input) ="onSearch($event)"/>
+
+    <select (change) = "sortProducts($event)" class = "sort">
+      <option value = "">Sort by</option>
+      <option value = "low"> Price: Low to High </option>
+      <option value = "high"> Price: High to Low </option>
+    </select>
+  </div>
 
   <div class="nav-right">
 
@@ -29,7 +37,7 @@
 
 
           <button class="logout-btn" (click) = "logout()">Logout</button>
-
+ 
         </div>
       </div>
 
@@ -53,19 +61,21 @@
 <!-- PRODUCT GRID -->
 <div class="products">
 
-  <div class="product-card"  *ngFor = "let product of pagedProducts" (click) = "goToProduct(product.id)">
+  <div class="product-card"  *ngFor = "let product of pagedProducts" >
 
-    <img [src] = "product.imageUrl" class="product-img"/>
+    <div class = "product-upper" (click) = "goToProduct(product.id)">
+      <img [src] = "product.imageUrl" class="product-img"/>
 
-    <h3>{{product.name}}</h3>
+      <h3>{{product.name}}</h3>
 
-    <!-- <p class="desc">{{product.description}}</p> -->
+      <!-- <p class="desc">{{product.description}}</p> -->
 
-    <p class="price">₹ {{product.price}}</p>
+      <p class = "price">₹ {{product.price}}</p>
+    </div>
 
-    <div class="cart-stock">
+    <div class = "cart-stock">
       <button 
-        class="cart-btn"
+        class = "cart-btn"
         [disabled] = "product.stock === 0"
         (click) = "addToCart(product.id)">
         Add to Cart
@@ -84,16 +94,11 @@
 
 
   </div>
-
-  <div class="pagination">
-
-  <button (click) = "prevPage()">Previous</button>
-
-  <span>Page {{currentPage}} of {{totalPages}}</span>
-
-  <button (click) = "nextPage()">Next</button>
-
 </div>
 
 
+<div class="pagination">
+  <button (click) = "prevPage()">Previous</button>
+  <span>Page {{currentPage}} of {{totalPages}}</span>
+  <button (click) = "nextPage()">Next</button>
 </div>

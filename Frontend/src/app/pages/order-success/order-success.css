@@ -1,9 +1,16 @@
 .success-container{
   text-align:center;
   margin-top:100px;
+    /* background: rgb(227, 209, 178);
+    min-height: 100vh; */
 }
 
 button{
   margin:10px;
   padding:10px 20px;
 }
+
+/* .page {
+  background: rgb(227, 209, 178);
+  min-height: 100vh;
+} */

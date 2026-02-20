@@ -9,6 +9,8 @@
 /* IMAGE */
 .image-section{
   flex:1;
+  margin-top: 20px;
+  margin-left: 60px;
 }
 
 .main-img{

@@ -26,6 +26,9 @@ export class Home implements OnInit {
 
   loggedUser:any;
 
+  filteredProducts : any[] = [];
+  searchText:string = "";
+
   constructor(private cartService:Cart, private authService : AuthService , private productService : ProductService, private cd : ChangeDetectorRef, private router : Router) {}
 
   ngOnInit() {
@@ -34,8 +37,11 @@ export class Home implements OnInit {
     this.productService.getAllProducts().subscribe( res => {
       console.log('Products: ', res);
       this.products = res;
+      this.filteredProducts = res;
+      console.log('hi' , this.products[0]);
       this.totalPages = Math.ceil(this.products.length / this.itemsPerPage);
       this.updatePageProducts();
+      console.log('Filtered:', this.filteredProducts)
       this.cd.detectChanges();
     });
 
@@ -46,22 +52,22 @@ export class Home implements OnInit {
     const startInd = (this.currentPage-1) * this.itemsPerPage;
     const endInd = startInd + this.itemsPerPage;
 
-    this.pagedProducts = this.products.slice(startInd, endInd);
+    this.pagedProducts = this.filteredProducts.slice(startInd, endInd);
   }
 
   nextPage(){
-  if(this.currentPage < this.totalPages){
-    this.currentPage++;
-    this.updatePageProducts();
+    if(this.currentPage < this.totalPages){
+      this.currentPage++;
+      this.updatePageProducts();
+    }
   }
-}
 
-prevPage(){
-  if(this.currentPage > 1){
-    this.currentPage--;
-    this.updatePageProducts();
+  prevPage(){
+    if(this.currentPage > 1){
+      this.currentPage--;
+      this.updatePageProducts();
+    }
   }
-}
 
 
   logout() {
@@ -107,5 +113,30 @@ prevPage(){
 
   goToProduct(id : number) {
     this.router.navigate(['/products', id])
+  }
+
+  onSearch(event : any) {
+    this.searchText = event.target.value.toLowerCase();
+    console.log('search ' , this.searchText);
+    this.filteredProducts = this.products.filter(p=> {
+      return p.name.toLowerCase().includes(this.searchText);
+    });
+
+    console.log('Filteredddd :', this.filteredProducts);
+    this.currentPage = 1; //rest
+    this.totalPages = Math.ceil(this.filteredProducts.length / this.itemsPerPage);
+    this.updatePageProducts();
+  }
+
+  sortProducts(event:any) {
+    const type = event.target.value;
+    if(type === 'low' ) {
+      this.filteredProducts.sort((a,b) => a.price - b.price);
+
+    } else if (type === 'high') {
+        this.filteredProducts.sort((a,b) => b.price - a.price);
+    }
+
+    this.updatePageProducts();
   }
 }

@@ -67,11 +67,11 @@ export class LoginComponent {
 
         //Role based redirect
         if(res.role === 'USER') {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/']);
         }
 
         else if (res.role === 'ADMIN') {
-          // this.router.navigate(['./admin']);
+          this.router.navigate(['./admin']);
         }
 
         console.log("Logged in user:", res);

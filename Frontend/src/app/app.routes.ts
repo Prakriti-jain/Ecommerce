@@ -9,16 +9,26 @@ import { OrderDetail } from './pages/order-detail/order-detail';
 import { ProductDetail } from './pages/product-detail/product-detail';
 import { Profile } from './pages/profile/profile';
 import { ProfileUpdate } from './pages/profile-update/profile-update';
+import { Payment } from './pages/payment/payment';
+import { authGuard } from './guards/auth-guard';
+import { Admin } from './pages/admin/admin';
+import { adminGuard } from './guards/admin-guard';
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
-    {path: 'home', component: Home},
+    {path: '', component: Home},
     {path: 'signup', component: SignupComponent},
     {path: 'cart', component: CartComponent}, 
-    {path: 'order-success', component: OrderSuccess}, 
-    {path: 'orders', component: Orders},
-    {path: 'order/:id', component: OrderDetail},
-    {path: 'products/:id', component: ProductDetail},
-    {path: 'profile', component: Profile},
-    {path: 'profile/update', component: ProfileUpdate}
+
+    //Auth guard on pages
+    {path: 'order-success', component: OrderSuccess, canActivate:[authGuard]}, 
+    {path: 'orders', component: Orders, canActivate:[authGuard]},
+    {path: 'order/:id', component: OrderDetail, canActivate:[authGuard]},
+    {path: 'products/:id', component: ProductDetail, canActivate:[authGuard]},
+    {path: 'profile', component: Profile, canActivate:[authGuard]},
+    {path: 'profile/update', component: ProfileUpdate, canActivate:[authGuard]},
+    {path: 'payment', component: Payment, canActivate:[authGuard]},
+    
+    //later admin guard on admin dashboard
+    {path: 'admin', component: Admin, canActivate:[adminGuard]}
 ];
