@@ -1,0 +1,49 @@
+.page {
+  background: rgb(227, 209, 178);
+  min-height: 100vh;
+}
+.payment-wrapper{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  padding:40px;
+
+}
+
+.left, .right{
+  background:white;
+  padding:30px;
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+.left{
+  width:40%;
+}
+
+.right{
+  width:35%;
+}
+
+.methods label{
+  display:block;
+  margin:12px 0;
+}
+
+button{
+  margin-top:20px;
+  width:100%;
+  padding:14px;
+  background:#0f172a;
+  color:white;
+  border:none;
+  border-radius:10px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.summary-item{
+  display:flex;
+  justify-content:space-between;
+  margin:10px 0;
+}

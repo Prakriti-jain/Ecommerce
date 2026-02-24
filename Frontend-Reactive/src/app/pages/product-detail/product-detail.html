@@ -1,0 +1,67 @@
+<app-page-header></app-page-header>
+
+<ng-container *ngIf ="product$ | async as product">
+  <div class="product-wrapper" *ngIf = "product">
+
+    <!-- LEFT: IMAGE -->
+    <div class="image-section">
+
+      <img [src] = "product.imageUrl" class="main-img">
+
+
+    </div>
+
+    <!-- RIGHT: DETAILS -->
+    <div class = "details-section">
+
+      <h1 class = "product-title">{{product.name}}</h1>
+
+      <div class = "rating">
+        ⭐⭐⭐⭐☆ <span>(120 reviews)</span>
+      </div>
+
+      <p class = "price">₹ {{product.price}}</p>
+
+      <p class = "stock"
+        [class.out] = "product.stock === 0">
+        {{ product.stock > 0 ? 'In Stock' : 'Out of Stock' }}
+      </p>
+
+      <p class="desc">{{product.description}}</p>
+
+      <!-- QUANTITY -->
+      <div class="qty-section">
+
+        <span>Quantity</span>
+
+        <div class="qty-box">
+          <button (click) = "decrease()">-</button>
+          <span>{{quantity}}</span>
+          <button (click) = "increase(product)">+</button>
+        </div>
+
+      </div>
+
+      <!-- ACTION BUTTONS -->
+      <div class="actions">
+
+        <button class="cart-btn"
+                (click) = "addToCart(product)"
+                [disabled] = "product.stock===0">
+          Add to Cart
+        </button>
+
+        <button class="buy-btn">
+          Buy Now
+        </button>
+
+      </div>
+
+    <div *ngIf = "addToCartResult$|async"> </div>
+      <span class="added" *ngIf = "added">✔ Added to cart</span>
+
+    </div>
+
+  </div>
+</ng-container>
+

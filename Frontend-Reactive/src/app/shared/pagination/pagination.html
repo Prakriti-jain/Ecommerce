@@ -1,0 +1,9 @@
+<div class ="page">
+    <div class="pagination">
+    <button (click) = "prev.emit()" [disabled] = "currentPage === 1">Previous</button>
+    <span>Page {{currentPage}} of {{totalPages}}</span>
+    <button (click) = "next.emit()" [disabled] = "currentPage === totalPages">Next</button>
+    </div>
+</div>
+
+

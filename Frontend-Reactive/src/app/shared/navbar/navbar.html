@@ -1,0 +1,53 @@
+<!-- NAVBAR -->
+<div class="navbar">
+
+  <div class="logo">🛒 E-Store</div>
+
+  <div class = "top-bar">
+    <input type = "text" placeholder="Search products..." class = "search" (input) ="onSearch($event)"/>
+
+    <select (change) = "sortProducts($event)" class = "sort">
+      <option value = "">Sort by</option>
+      <option value = "low"> Price: Low to High </option>
+      <option value = "high"> Price: High to Low </option>
+    </select>
+  </div>
+
+  <div class="nav-right">
+
+    <!-- NOT LOGGED IN -->
+    <ng-container *ngIf = "!loggedUser">
+
+      <button routerLink="/login">Login</button>
+      <button routerLink="/signup">Signup</button>
+
+    </ng-container>
+
+    <!-- LOGGED IN -->
+    <ng-container *ngIf = "loggedUser">
+
+      <div class="profile" (click) = "toggleProfileMenu()">
+        👤 {{loggedUser.username}}
+
+        <div class="dropdown" *ngIf = "showProfileMenu">
+
+          <button routerLink="/profile">View Profile</button>
+          <button routerLink="/profile/update">Update Profile</button>
+          <button routerLink="/orders">My Orders</button>
+
+
+          <button class="logout-btn" (click) = "logout()">Logout</button>
+ 
+        </div>
+      </div>
+
+    </ng-container>
+
+    <button (click) = "goToCart()" class = "cart-btn-user"> 🛒 Cart 
+      <span class = "cart-btn-badge" *ngIf = "(cartCount$ | async) as count"> {{ count }} </span>
+    </button>
+
+  </div>
+
+</div>
+

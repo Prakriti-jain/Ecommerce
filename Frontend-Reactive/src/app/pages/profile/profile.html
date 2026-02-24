@@ -1,0 +1,54 @@
+<div class = "page">
+<app-page-header></app-page-header>
+
+<div class="profile-wrapper" *ngIf = "user">
+
+  <div class="profile-card">
+
+    <div class ="left">
+      <div class="avatar">
+        {{user.username[0] | uppercase}}
+      </div>
+
+      <h2>{{user.name}}</h2>
+      <p class="role">{{user.role}}</p>
+    </div>
+
+    <div class="right">
+
+      <div class="info">
+        <label>Username</label>
+        <span>{{user.username}}</span>
+      </div>
+
+      <div class="info">
+        <label>Gender</label>
+        <span>{{user.gender || 'Not added'}}</span>
+      </div>
+
+      <div class="info">
+        <label>Date of Birth</label>
+        <span>{{user.dob || 'Not added'}}</span>
+      </div>
+
+      <div class="info">
+        <label>Phone</label>
+        <span>{{user.phone || 'Not added'}}</span>
+      </div>
+
+      <div class="info">
+        <label>Address</label>
+        <span>{{user.address || 'Not added'}}</span>
+      </div>
+
+      <button routerLink="/profile/update" class="edit-btn">
+        Edit Profile
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+</div>
+

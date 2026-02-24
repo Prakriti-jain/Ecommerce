@@ -1,0 +1,50 @@
+<app-page-header> </app-page-header>
+<div class="cart-page">
+
+  <h2>Your Shopping Cart 🛒</h2>
+
+  <ng-container *ngIf = "cartItems$ | async as cartItems">
+  <div *ngIf = "cartItems.length === 0" class="empty">
+    Cart is empty
+  </div>
+
+  <div class="cart-container">
+
+    <div class="cart-item" *ngFor = "let item of cartItems">
+
+      <img [src] = "item.product.imageUrl" />
+
+      <div class="item-details">
+
+        <h3>{{item.product.name}}</h3>
+
+        <p class="price">₹ {{item.product.price}}</p>
+
+        <div class="qty-box">
+          <button (click)= "decreaseQty(item)">-</button>
+          <span>{{item.quantity}}</span>
+          <button (click)= "increaseQty(item)">+</button>
+        </div>
+
+        <p class="subtotal">
+          Subtotal: ₹ {{item.product.price * item.quantity}}
+        </p>
+
+      </div>
+
+      <button class="remove" (click)= "remove(item.id)">
+        Remove
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="total-box" *ngIf ="cartItems.length > 0">
+    <h2>Total: ₹ {{totalAmount$ | async}}</h2>
+    <button class="checkout-btn" (click) = "placeOrder()">Proceed to Checkout</button>
+  </div>
+  </ng-container>
+
+
+</div>

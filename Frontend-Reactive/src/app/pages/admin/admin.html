@@ -1,0 +1,27 @@
+<div class = "admin">
+    <div class = "navbar">
+        <div class = "logo"> 🛒 E-Store </div>
+        <div class = "login-bar"> 
+            <!-- NOT LOGGED IN -->
+            <ng-container class = "loginbtn" *ngIf = "!loggedUser">
+                <button routerLink="/login">Login</button>
+            </ng-container>
+
+            <!-- LOGGED IN -->
+            <ng-container *ngIf = "loggedUser">
+                <div class="profile" (click) = "toggleProfileMenu()">
+                    👤 {{loggedUser.username}}
+                    <div class="dropdown" *ngIf = "showProfileMenu">
+                        <button class="logout-btn" (click) = "logout()">Logout</button>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    
+
+    <div class="banner">
+        <h1> Admin Dashboard </h1>
+    </div>
+
+</div>

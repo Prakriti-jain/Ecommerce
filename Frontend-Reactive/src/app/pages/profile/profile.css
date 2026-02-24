@@ -1,0 +1,70 @@
+.page {
+  background: rgb(227, 209, 178);
+  min-height: 100vh;
+}
+.profile-wrapper{
+  display:flex;
+  justify-content:center;
+  margin-top:40px;
+}
+
+.profile-card{
+  display:flex;
+  width:70%;
+  background:white;
+  border-radius:14px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+  padding:40px;
+  gap:40px;
+}
+
+.left{
+  text-align:center;
+  width:35%;
+  border-right:1px solid #e2e8f0;
+}
+
+.avatar{
+  width:90px;
+  height:90px;
+  border-radius:50%;
+  background:#0f172a;
+  color:white;
+  font-size:32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:auto;
+  margin-bottom:15px;
+}
+
+.role{
+  color:#64748b;
+}
+
+.right{
+  width:65%;
+}
+
+.info{
+  display:flex;
+  justify-content:space-between;
+  margin:15px 0;
+  padding-bottom:10px;
+  border-bottom:1px solid #f1f5f9;
+}
+
+label{
+  font-weight:600;
+  color:#334155;
+}
+
+.edit-btn{
+  margin-top:25px;
+  padding:12px 20px;
+  background:#0f172a;
+  color:white;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}

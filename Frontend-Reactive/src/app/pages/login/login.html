@@ -1,0 +1,61 @@
+<div class="login-container">
+
+  <div class="login-box">
+
+    <div class="role-toggle">
+      <button 
+        [class.active] = "selectedRole === 'USER'"
+        (click) = "switchRole('USER')">User</button>
+
+      <button 
+        [class.active] = "selectedRole ==='ADMIN'"
+        (click) = "switchRole('ADMIN')">Admin</button>
+    </div>
+
+    <div class = "inputBox">
+
+      <h2>{{selectedRole}} Login</h2>
+
+      <form [formGroup] = "loginForm" (ngSubmit) = "login()">
+
+        <input type="text" placeholder="Username" formControlName="username">
+        <div class = "error-form" *ngIf = "loginForm.get('username')?.invalid && (loginForm.get('username')?.touched || loginForm.get('username')?.dirty)">
+          <span>
+            Username is required
+          </span>
+
+        </div>
+
+        <input type="password" placeholder="Password" formControlName="password">
+        <div class = "error-form" *ngIf = "loginForm.get('password')?.invalid && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)">
+          <span>
+            Password is required
+          </span>
+
+        </div>
+
+        <button type="submit">Login</button>
+      </form>
+
+      </div>
+
+      <div *ngIf = "loginResult$ | async"></div>
+      <!-- ERROR  -->
+      <p class="error" *ngIf = "errorMessage$ | async as errorMessage" >
+        {{errorMessage}}
+      </p>
+
+      <!-- SIGNUP BUTTON -->
+      <div class="signup-section">
+        <p>Don't have an account?</p>
+        <button (click) = "signup()">Signup</button>
+      </div>
+
+    <!-- SUCCESS -->
+    <div class="success" *ngIf = "loggedUser">
+      Welcome {{loggedUser.username}} ({{loggedUser.role}})
+    </div>
+
+  </div>
+
+</div>

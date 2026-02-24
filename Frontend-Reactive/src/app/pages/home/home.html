@@ -1,0 +1,54 @@
+
+
+<!-- HERO BANNER -->
+<div class="banner">
+  <h1>Discover Latest Tech</h1>
+  <p>Best deals on electronics </p>
+</div>
+
+<!-- PRODUCT GRID -->
+<div class="products">
+
+  <div class="product-card"  *ngFor = "let product of pagedProducts$ | async" >
+
+    <div class = "product-upper" (click) = "goToProduct(product.id)">
+      <img [src] = "product.imageUrl" class="product-img"/>
+
+      <h3>{{product.name}}</h3>
+
+      <!-- <p class="desc">{{product.description}}</p> -->
+
+      <p class = "price">₹ {{product.price}}</p>
+    </div>
+
+    <div class = "cart-stock">
+      <button 
+        class = "cart-btn"
+        [disabled] = "product.stock === 0"
+        (click) = "addToCart(product)">
+        Add to Cart
+      </button>
+
+      <div class="stock">
+        <span *ngIf = "product.stock > 0">
+          Stock: {{ product.stock }}
+        </span>
+
+        <span *ngIf = "product.stock === 0" class="out">
+          Out of Stock
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class = "pagination">
+  <app-pagination
+      [currentPage] = "(currentPage$ | async) ?? 1"
+      [totalPages] = "(totalPages$ | async) ?? 1"  
+      (next)= "nextPage()"
+      (prev)= "prevPage()">
+  </app-pagination>
+</div>
+
+

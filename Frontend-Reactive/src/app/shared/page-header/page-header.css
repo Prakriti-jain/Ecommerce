@@ -1,0 +1,25 @@
+.page-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 20px;
+  background:#0f172a;
+}
+
+.back-btn,
+.home-btn{
+  padding:8px 16px;
+  border:none;
+  background:#0f172a;
+  color:white;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:20px;
+  font-weight:bold;
+  
+}
+
+.back-btn:hover,
+.home-btn:hover{
+  background:#1e293b;
+}

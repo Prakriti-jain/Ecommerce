@@ -1,0 +1,34 @@
+.page {
+  background: rgb(227, 209, 178);
+  min-height: 100vh
+
+}
+.orders-container{
+  width:80%;
+  padding: 20px;
+  margin:auto;
+
+}
+
+.order-card{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:white;
+  padding:20px;
+  margin:20px 0;
+  border-radius:12px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  /* border: solid #8a91a0; */
+  /* border-color: #5a6274; */
+}
+
+.amount{
+  font-size:18px;
+  font-weight:bold;
+}
+
+.status{
+  color:green;
+  margin-bottom:10px;
+}
