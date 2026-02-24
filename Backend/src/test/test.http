@@ -97,7 +97,7 @@ Content-Type: application/json
 
 
 ### get cart items of the user id
-GET http://localhost:8080/cart/2
+GET http://localhost:8080/cart/10
 
 ### delete from cart with given item id
 DELETE http://localhost:8080/cart/item/2

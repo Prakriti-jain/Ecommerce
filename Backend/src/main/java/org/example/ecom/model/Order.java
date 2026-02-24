@@ -24,7 +24,7 @@ public class Order {
     private double totalAmount;
     private String status;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<OrderItem> orderItemList = new ArrayList<>();
 

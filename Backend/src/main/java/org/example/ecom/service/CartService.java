@@ -14,8 +14,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * This service manages:
+ * - Cart creation and retrieval
+ * - Adding products to cart
+ * - Updating item quantities
+ * - Removing items from cart
+ */
 @Service
-@Transactional
 public class CartService {
     @Autowired
     private CartRepository cartRepo;
@@ -29,7 +35,14 @@ public class CartService {
     @Autowired
     private CartItemRepository cartItemRepo;
 
-    //get cart of a user or create it
+    /**
+     * Retrieves the cart associated with a given user.
+     * If the cart does not exist, a new cart is created and saved.
+     *
+     * @param userId ID of the user
+     * @return existing or newly created Cart object
+     * @throws RuntimeException if the user does not exist
+     */
     public Cart getCartbyUser(Long userId) {
         User user = userRepo.findById(userId).orElseThrow(() -> new RuntimeException("User not Found!"));
 
@@ -40,7 +53,16 @@ public class CartService {
         });
     }
 
-    //Add product to a cart
+    /**
+     * Adds a product to the user's cart.
+     * Creates a new CartItems entry linking the cart and product.
+     *
+     * @param userId ID of the user
+     * @param productId ID of the product to add
+     * @param quantity quantity of the product
+     * @return saved CartItems object
+     * @throws RuntimeException if product is not found
+     */
     public CartItems addProductToCart(Long userId, Long productId, int quantity) {
         Cart cart = getCartbyUser(userId);
         Product product = productRepo.findById(productId).orElseThrow(() -> new RuntimeException("Product not Found!"));
@@ -53,33 +75,46 @@ public class CartService {
         return cartItemRepo.save(item);
     }
 
-    //remove from cart
-    @Transactional
+    /**
+     * Removes an item from the cart.
+     * Removes item from parent cart collection
+     * Breaks cart reference in CartItems entity
+     *
+     * @param itemId ID of the cart item to remove
+     * @throws RuntimeException if the item does not exist
+     */
     public void removeFromCart(Long itemId) {
 
         CartItems item = cartItemRepo.findById(itemId)
                 .orElseThrow(() -> new RuntimeException("Item not found"));
 
         Cart cart = item.getCart();
-
-        // 🔥 REMOVE FROM PARENT COLLECTION
         cart.getCartItems().remove(item);
-
-        // 🔥 break relation
-        item.setCart(null);
+        cartItemRepo.delete(item);
 
         cartRepo.save(cart);
     }
 
-
-
-    //get all items in cart
+    /**
+     * Retrieves all items in a user's cart.
+     *
+     * @param userId ID of the user
+     * @return Cart object containing all the cart items
+     */
     public Cart getCartItems(Long userId) {
         Cart cart = getCartbyUser(userId);
 //        return cartItemRepo.findItemsByCart(cart);
         return cart;
     }
 
+    /**
+     * Updates the quantity of a specific cart item.
+     *
+     * @param itemId ID of the cart item
+     * @param quantity new quantity value
+     * @return updated CartItems object
+     * @throws RuntimeException if the item does not exist
+     */
     public CartItems updateQuantity(Long itemId, int quantity){
 
         CartItems item = cartItemRepo.findById(itemId)

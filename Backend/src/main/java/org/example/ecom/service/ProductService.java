@@ -8,32 +8,65 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * This includes:
+ * - Adding products
+ * - Fetching products
+ * - Updating product details
+ * - Deleting products
+ */
 @Service
 public class ProductService {
 
     @Autowired
     private ProductRepository repo;
 
-    //add product
+    /**
+     * Adds a new product to the system.
+     *
+     * @param product product entity to be saved
+     * @return saved Product object
+     */
     public Product addProduct(Product product){
         return repo.save(product);
     }
 
-    //get all products
+    /**
+     * Retrieves all products from the database.
+     *
+     * @return list of all available products
+     */
     public List<Product> getAllProducts(){
         return repo.findAll();
     }
 
+    /**
+     * Fetches a product using its unique ID.
+     *
+     * @param productId ID of the product
+     * @return Optional containing product if found
+     */
     public Optional<Product> getProductById(Long productId) {
         return repo.findById(productId);
     }
 
-    //delete product
+    /**
+     * Deletes a product from the system.
+     *
+     * @param id ID of the product to be deleted
+     */
     public void deleteProduct(Long id){
         repo.deleteById(id);
     }
 
-    //update product
+    /**
+     * Updates the details of an existing product.
+     *
+     * @param id ID of the product to update
+     * @param updatedProduct product object containing updated fields
+     * @return updated Product object
+     * @throws RuntimeException if the product does not exist
+     */
     public Product updateProduct(Long id, Product updatedProduct) {
         Product product = repo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found"));

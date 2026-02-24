@@ -19,7 +19,8 @@ public class Cart {
     private User user;
 
     // One cart → many cart items
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    //orphan removal - remove from db if item from parent list (cart items in this case) is removed
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<CartItems> cartItems = new ArrayList<>();
 
