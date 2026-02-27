@@ -4,16 +4,17 @@ import { ProductService } from '../../services/product';
 import { Product } from '../../models/product.model';
 import { OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth';
-import { Router, RouterLink } from "@angular/router";
+import { Router} from "@angular/router";
 import { Cart } from '../../services/cart';
-import { BehaviorSubject, combineLatest, Observable , map, Subject, switchMap, startWith, merge, tap} from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable , map, Subject} from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { Pagination } from '../../shared/pagination/pagination';
 import { UiState } from '../../services/ui-state';
+import { AddToCart } from "../../shared/add-to-cart/add-to-cart";
 
 @Component({
   selector: 'app-home',
-  imports: [NgFor, RouterLink, NgIf, AsyncPipe, Pagination],
+  imports: [NgFor, NgIf, AsyncPipe, Pagination, AddToCart],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -45,7 +46,12 @@ export class Home implements OnInit {
 
   loggedUser:any;
 
-  constructor(private cartService:Cart, private authService : AuthService , private productService : ProductService, private router : Router, private ui : UiState) {}
+  constructor(
+    private cartService:Cart, 
+    private authService : AuthService, 
+    private productService : ProductService, 
+    private router : Router, private ui : UiState
+  ) {}
 
   ngOnInit() {
     this.loggedUser = this.authService.getUser();
@@ -106,19 +112,24 @@ export class Home implements OnInit {
     );
 
 
-    this.addToCartResult$ = this.addToCartTrigger$.pipe(
-      switchMap((product) => this.cartService.addToCart(this.loggedUser.id, product.id, 1)),
-      tap(() => alert("Product is added to cart "))
-    )
+    // this.addToCartResult$ = this.addToCartTrigger$.pipe(
+    //   switchMap((product) => this.authService.user$.pipe(
+    //     switchMap(user => {
+    //       if(!user) return [];
+    //       return this.cartService.addToCart(user.id, product.id,1);
+    //     })
+    //   )),
+    //   tap(() => alert("Product is added to cart "))
+    // )
 
-    const user = this.authService.getUser();
-    if(user) {
-      this.cartCount$ = this.addToCartResult$.pipe(
-        startWith(null),
-        switchMap(() => this.cartService.getCartCount(this.loggedUser.id)),
-        map(res => res.cartItems.length)
-      );
-    }
+    // const user = this.authService.getUser();
+    // if(user) {
+    //   this.cartCount$ = this.addToCartResult$.pipe(
+    //     startWith(null),
+    //     switchMap(() => this.cartService.getCartCount(this.loggedUser.id)),
+    //     map(res => res.cartItems.length)
+    //   );
+    // }
   }
 
   nextPage() {
@@ -153,10 +164,10 @@ export class Home implements OnInit {
   // }
 
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['./login']);
-  }
+  // logout() {
+  //   this.authService.logout();
+  //   this.router.navigate(['./login']);
+  // }
 
   // addToCart(productId : number) {
   //   const userId = this.loggedUser.id;
@@ -186,15 +197,15 @@ export class Home implements OnInit {
     this.addToCartTrigger$.next(product);
   }
 
-  goToCart() {
-    this.router.navigate(['/cart']);
-  }
+  // goToCart() {
+  //   this.router.navigate(['/cart']);
+  // }
 
-  showProfileMenu : boolean = false
+  // showProfileMenu : boolean = false
 
-  toggleProfileMenu() {
-    this.showProfileMenu = !this.showProfileMenu;
-  }
+  // toggleProfileMenu() {
+  //   this.showProfileMenu = !this.showProfileMenu;
+  // }
 
   // cartCount:number = 0;
 

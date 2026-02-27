@@ -6,7 +6,7 @@ import { AuthService } from '../../services/auth';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Order } from '../../services/order';
-import { Observable, Subject, catchError, map, switchMap, tap, of} from 'rxjs';
+import { Observable, Subject, catchError, map, switchMap, tap, of, EMPTY} from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -59,8 +59,8 @@ export class Payment implements OnInit {
       }),
 
       catchError((err) => {
-        alert(err.error.message || "Order failed");
-        return of(null);
+        alert(err.error.message || err.error || "Order failed");
+        return EMPTY;
       })
 
     )

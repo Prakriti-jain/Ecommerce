@@ -7,11 +7,12 @@ import { NgIf } from '@angular/common';
 import { PageHeader } from '../../shared/page-header/page-header';
 import { Observable, of, Subject, switchMap , tap} from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { AddToCart } from "../../shared/add-to-cart/add-to-cart";
 
 
 @Component({
   selector: 'app-product-detail',
-  imports: [NgIf, PageHeader, AsyncPipe],
+  imports: [NgIf, PageHeader, AsyncPipe, AddToCart],
   templateUrl: './product-detail.html',
   styleUrl: './product-detail.css',
 })
@@ -19,16 +20,16 @@ export class ProductDetail implements OnInit{
   product$! : Observable<any>;
   // product : any ;
   quantity : number = 1;
-  added : boolean = false;
+  // added : boolean = false;
 
-  private addToCartTrigger$ = new Subject<any>();
-  addToCartResult$! : Observable<any>;
+  // private addToCartTrigger$ = new Subject<any>();
+  // addToCartResult$! : Observable<any>;
 
   constructor(
     private route:ActivatedRoute,
     private productService:ProductService,
-    private cartService:Cart,
-    private authService:AuthService,
+    // private cartService:Cart,
+    // private authService:AuthService,
   ){}
 
   ngOnInit(): void {
@@ -44,19 +45,18 @@ export class ProductDetail implements OnInit{
 
     this.product$ = this.productService.getProductById(id);
 
-    this.addToCartResult$ = this.addToCartTrigger$.pipe(
-      switchMap((product) => {
-        const user = this.authService.getUser();
-        if(!user) return of(null);
+    // this.addToCartResult$ = this.addToCartTrigger$.pipe(
+    //   switchMap((product) => {
+    //     const user = this.authService.getUser();
+    //     if(!user) return of(null);
+    //     return this.cartService.addToCart(user.id, product.id, this.quantity);
+    //   }),
 
-        return this.cartService.addToCart(user.id, product.id, this.quantity);
-      }),
-
-      tap(() => {
-        this.added = true;
-        setTimeout(()=>this.added = false, 1500)
-      })
-    )
+    //   tap(() => {
+    //     this.added = true;
+    //     setTimeout(()=>this.added = false, 1500);
+    //   })
+    // )
   }
 
   increase(product: any){
@@ -83,8 +83,8 @@ export class ProductDetail implements OnInit{
   //     });
   // }  
 
-  addToCart(product:any) {
-    this.addToCartTrigger$.next(product);
-  }
+  // addToCart(product:any) {
+  //   this.addToCartTrigger$.next(product);
+  // }
 }
 

@@ -1,53 +1,54 @@
 <!-- NAVBAR -->
-<div class="navbar">
+<div *ngIf ="showNavbar$ | async">
+  <div class="navbar">
 
-  <div class="logo">🛒 E-Store</div>
+    <div class="logo" routerLink = "/">🛒 E-Store</div>
 
-  <div class = "top-bar">
-    <input type = "text" placeholder="Search products..." class = "search" (input) ="onSearch($event)"/>
+    <div class = "top-bar">
+      <input type = "text" placeholder="Search products..." class = "search" (input) ="onSearch($event)"/>
 
-    <select (change) = "sortProducts($event)" class = "sort">
-      <option value = "">Sort by</option>
-      <option value = "low"> Price: Low to High </option>
-      <option value = "high"> Price: High to Low </option>
-    </select>
-  </div>
+      <select (change) = "sortProducts($event)" class = "sort">
+        <option value = "">Sort by</option>
+        <option value = "low"> Price: Low to High </option>
+        <option value = "high"> Price: High to Low </option>
+      </select>
+    </div>
 
-  <div class="nav-right">
+    <div class="nav-right" >
 
-    <!-- NOT LOGGED IN -->
-    <ng-container *ngIf = "!loggedUser">
+      <!-- LOGGED IN -->
+      <ng-container  *ngIf = "loggedUser$ | async as loggedUser; else loggedOut">
 
-      <button routerLink="/login">Login</button>
-      <button routerLink="/signup">Signup</button>
+        <div class="profile" (click) = "toggleProfileMenu()">
+          👤 {{loggedUser.username}}
 
-    </ng-container>
+          <div class="dropdown" *ngIf = "showProfileMenu">
 
-    <!-- LOGGED IN -->
-    <ng-container *ngIf = "loggedUser">
-
-      <div class="profile" (click) = "toggleProfileMenu()">
-        👤 {{loggedUser.username}}
-
-        <div class="dropdown" *ngIf = "showProfileMenu">
-
-          <button routerLink="/profile">View Profile</button>
-          <button routerLink="/profile/update">Update Profile</button>
-          <button routerLink="/orders">My Orders</button>
+            <button routerLink="/profile">View Profile</button>
+            <button routerLink="/profile/update">Update Profile</button>
+            <button routerLink="/orders">My Orders</button>
 
 
-          <button class="logout-btn" (click) = "logout()">Logout</button>
- 
+            <button class="logout-btn" (click) = "logout()">Logout</button>
+  
+          </div>
         </div>
-      </div>
 
-    </ng-container>
+      </ng-container>
 
-    <button (click) = "goToCart()" class = "cart-btn-user"> 🛒 Cart 
-      <span class = "cart-btn-badge" *ngIf = "(cartCount$ | async) as count"> {{ count }} </span>
-    </button>
+            <!-- NOT LOGGED IN -->
+       <ng-template #loggedOut>
+        <button routerLink="/login">Login</button>
+        <button routerLink="/signup">Signup</button>
+       </ng-template>
+
+      <button (click) = "goToCart()" class = "cart-btn-user"> 🛒 Cart 
+        <span class = "cart-btn-badge" *ngIf = "(cartCount$ | async) as count"> {{ count }} </span>
+      </button>
+
+    </div>
 
   </div>
-
 </div>
+
 

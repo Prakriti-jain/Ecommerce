@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { BehaviorSubject, catchError, Observable, of, Subject, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, catchError, EMPTY, Observable, of, Subject, switchMap, tap } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -47,7 +47,7 @@ export class SignupComponent {
         }),
         catchError(err => {
           this.errorMessage$.next(err.error?.message || err.error || "Signup failed");
-          return of(null); //just so that website doesn't crash after displaying error, and keeps the stream alive
+          return EMPTY;
         })
       ))
     )

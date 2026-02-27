@@ -1,4 +1,7 @@
+<!-- <app-navbar>
 
+</app-navbar> -->
+<!-- <div *ngIf = "addToCartResult$ | async"> </div> -->
 
 <!-- HERO BANNER -->
 <div class="banner">
@@ -22,12 +25,14 @@
     </div>
 
     <div class = "cart-stock">
-      <button 
+      <!-- <button 
         class = "cart-btn"
         [disabled] = "product.stock === 0"
         (click) = "addToCart(product)">
         Add to Cart
-      </button>
+      </button> -->
+      <app-add-to-cart [product] = "product"></app-add-to-cart>
+      
 
       <div class="stock">
         <span *ngIf = "product.stock > 0">

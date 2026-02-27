@@ -1,0 +1,7 @@
+<button
+  (click) = "add()"
+  [disabled] = "product.stock === 0">
+  Add to Cart
+</button>
+
+<ng-container *ngIf = "addResults$ | async"></ng-container>

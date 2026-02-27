@@ -5,7 +5,7 @@ import { AuthService } from '../../services/auth';
 import { Order } from '../../services/order';
 import { Router } from '@angular/router';
 import { PageHeader } from "../../shared/page-header/page-header";
-import { Observable, Subject, map, merge, shareReplay, startWith, switchMap} from 'rxjs';
+import { Observable, Subject, map, merge, shareReplay, startWith, switchMap, tap} from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -27,7 +27,12 @@ export class CartComponent implements OnInit {
   cartItems$!: Observable<any[]>;
   totalAmount$! : Observable<number>;
 
-  constructor(private router :Router, private authService: AuthService, private cartService:Cart, private orderService : Order){}
+  constructor(
+    private router :Router, 
+    private authService: AuthService, 
+    private cartService:Cart, 
+    private orderService : Order
+  ){}
 
   // button click -> event -> API call -> cart data -> UI update
   // ngOnInit me humne define kiya hai ki jab bhi increaseQty$, decreaseQty$, removeItem$ emit karein, tab switchMap se API call ho.
@@ -56,8 +61,16 @@ export class CartComponent implements OnInit {
     )
 
     //this is for reloading cart whenevr any action happens
-    this.cartItems$ = merge(this.cartService.getRefreshTrigger(), increase$, decrease$, remove$).
-      pipe(startWith(null), switchMap(() => this.cartService.getCartItems(this.userId)), map(res => res.cartItems), shareReplay(1)
+    this.cartItems$ = merge(
+      this.cartService.getRefreshTrigger(), 
+      increase$, 
+      decrease$, 
+      remove$
+    ).pipe(
+      startWith(null), 
+      switchMap(() => this.cartService.getCartItems(this.userId)), 
+      map(res => res.cartItems),
+      shareReplay(1)
   )
 
     this.totalAmount$ = this.cartItems$.pipe(

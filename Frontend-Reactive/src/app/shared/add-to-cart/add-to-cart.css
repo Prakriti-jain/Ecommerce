@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  flex : 1
+}
+
+button {
+  flex : 1;
+  padding: 10px 16px;
+  background: #1f4037;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+  height: 100%;
+}
+
+button:disabled {
+  background: #bdbdbd;
+  cursor: not-allowed;
+}
+
+button:hover {
+  background: #428573;
+}

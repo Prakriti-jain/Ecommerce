@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LoginRequest } from '../models/login.model';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { User } from '../models/user.model';
 
 @Injectable({
@@ -9,36 +9,47 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
   private baseUrl = 'http://localhost:8080/auth'; //springboot url
-  private currentUser : User | null = null;
+  // private currentUser : User | null = null;
 
-  constructor(private http : HttpClient) {
-    //app start hone par user restore
+  
+  //one Behaviour Subject and one Observable so that no component can change the value of the user and can only access to observable 
+  private userSubject = new BehaviorSubject<User | null> (this.getStoredUser()); 
+  user$ = this.userSubject.asObservable();
+
+
+  constructor(private http : HttpClient) {}
+
+  getStoredUser() : User | null {
     const savedUser = localStorage.getItem('user');
-    if(savedUser) {
-      this.currentUser = JSON.parse(savedUser);
-    }
+    return savedUser ? JSON.parse(savedUser): null;
   }
 
   login(data:LoginRequest) : Observable<User> {
-    return this.http.post<User>(`${this.baseUrl}/login`, data);
+    return this.http.post<User>(`${this.baseUrl}/login`, data).pipe(
+      tap(user => {
+        localStorage.setItem('user', JSON.stringify(user));
+        this.userSubject.next(user);
+      })
+    );
   }
 
-  setUser(user : User) {
-    this.currentUser = user;
-    localStorage.setItem('user', JSON.stringify(user));
-  }
+  // setUser(user : User) {
+  //   this.currentUser = user;
+  //   localStorage.setItem('user', JSON.stringify(user));
+  // }
 
   getUser(){
-    return this.currentUser;
+    return this.userSubject.value;
   }
 
   logout() {
-    this.currentUser = null;
     localStorage.removeItem('user');
+    this.userSubject.next(null);
   }
 
   isLogged(){
-    return this.currentUser != null;
+    // return this.currentUser != null;
+    return this.userSubject.value != null;
   }
 
   signup(data : any) {
@@ -46,7 +57,12 @@ export class AuthService {
   }
 
   updateProfile(userId:number,data:any){
-  return this.http.put(`http://localhost:8080/auth/update/${userId}`,data);
+  return this.http.put(`http://localhost:8080/auth/update/${userId}`,data).pipe(
+    tap((updatedUser : any) => {
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      this.userSubject.next(updatedUser);
+    })
+  );
 }
 
 }

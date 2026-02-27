@@ -33,7 +33,7 @@ export class ProfileUpdate implements OnInit{
     this.auth.updateProfile(this.user.id, this.form.value)
     .subscribe({
       next : (res : any) => {
-        this.auth.setUser(res);
+        // this.auth.setUser(res);
         alert("Profile updated");
         this.cd.detectChanges();
         this.router.navigate(['/profile']);

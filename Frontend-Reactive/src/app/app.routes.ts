@@ -30,5 +30,8 @@ export const routes: Routes = [
     {path: 'payment', component: Payment, canActivate:[authGuard]},
     
     //later admin guard on admin dashboard
-    {path: 'admin', component: Admin, canActivate:[adminGuard]}
+    {path: 'admin', component: Admin, canActivate:[adminGuard]}, 
+
+    //path redirect to home
+    { path: '**', redirectTo: '' }
 ];

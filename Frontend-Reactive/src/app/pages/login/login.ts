@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {CommonModule } from '@angular/common';
 import { AsyncPipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subject, Observable, switchMap, tap, catchError, of} from 'rxjs';
+import { BehaviorSubject, Subject, Observable, switchMap, tap, catchError, of, EMPTY} from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -41,32 +41,36 @@ export class LoginComponent {
   ngOnInit() {
     this.loginResult$ = this.loginTrigger$.pipe(
       switchMap(loginForm => this.authService.login(loginForm).pipe(
+        
+        catchError(err => {
+          this.errorMessage$.next(err.error?.message || err.error || "Login failed from server");
+          return EMPTY;
+        }), 
+        
         tap((res : User) => {
+          console.log(res.role);
+
           if (res.role !== this.selectedRole) {
             console.log("error!!!")
             this.errorMessage$.next("Wrong panel selected. Try " + res.role + " login.");
             return;
-        }
+          }
 
-        this.loggedUser = res;
-        this.authService.setUser(res);
-        this.errorMessage$.next('');
+          // this.loggedUser = res;
+          // this.authService.setUser(res);
+          this.errorMessage$.next('');
 
-        //Role based redirect
-        if(res.role === 'USER') {
-          this.router.navigate(['/']);
-        } else if (res.role === 'ADMIN') {
-          this.router.navigate(['./admin']);
-        }
+          //Role based redirect
+          if(res.role === 'USER') {
+            this.router.navigate(['/']);
+          } else if (res.role === 'ADMIN') {
+            this.router.navigate(['./admin']);
+          }
 
-        console.log("Logged in user:", res);
+          console.log("Logged in user:", res);
 
         }),
 
-        catchError(err => {
-          this.errorMessage$.next(err.error?.message || "Login failed from server");
-          return of(null);
-        })
       ))
     )
   }

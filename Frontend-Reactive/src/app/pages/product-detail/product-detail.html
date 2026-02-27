@@ -3,19 +3,12 @@
 <ng-container *ngIf ="product$ | async as product">
   <div class="product-wrapper" *ngIf = "product">
 
-    <!-- LEFT: IMAGE -->
     <div class="image-section">
-
       <img [src] = "product.imageUrl" class="main-img">
-
-
     </div>
 
-    <!-- RIGHT: DETAILS -->
     <div class = "details-section">
-
       <h1 class = "product-title">{{product.name}}</h1>
-
       <div class = "rating">
         ⭐⭐⭐⭐☆ <span>(120 reviews)</span>
       </div>
@@ -45,11 +38,13 @@
       <!-- ACTION BUTTONS -->
       <div class="actions">
 
-        <button class="cart-btn"
+        <!-- <button class="cart-btn"
                 (click) = "addToCart(product)"
                 [disabled] = "product.stock===0">
           Add to Cart
-        </button>
+        </button> -->
+
+        <app-add-to-cart [product] = "product"></app-add-to-cart>
 
         <button class="buy-btn">
           Buy Now
@@ -57,8 +52,8 @@
 
       </div>
 
-    <div *ngIf = "addToCartResult$|async"> </div>
-      <span class="added" *ngIf = "added">✔ Added to cart</span>
+    <!-- <div *ngIf = "addToCartResult$|async"> </div>
+      <span class="added" *ngIf = "added">✔ Added to cart</span> -->
 
     </div>
 

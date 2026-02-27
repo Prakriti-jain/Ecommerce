@@ -37,10 +37,11 @@
   text-align:center;
   cursor:pointer;
   border-radius: 7px;
+  padding: 10px;
 }
 
 .dropdown :hover {
-    background: #ff9800;
+    background: rgb(227, 209, 178);
 }
 
 .banner {
