@@ -15,7 +15,6 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './cart.css',
 })
 export class CartComponent implements OnInit {
-  // cartItems:any[] = [];
   loggedUser:any;
   userId:any ; 
 
@@ -95,65 +94,6 @@ export class CartComponent implements OnInit {
     this.removeItem$.next(itemId);
   }
 
-  
-  
-// totalAmount:number = 0;
-
-// loadCart() {
-//   this.cartService.getCartItems(this.userId).subscribe({
-//     next:(res)=>{
-//       this.cartItems = res.cartItems;
-//       this.calculateTotal();
-//       this.cd.detectChanges();
-//     }
-//   })
-// }
-
-
-// loadCart() {
-//   this.cartItems$ = this.cartService.getCartItems(this.userId).pipe(
-//     map(res => res.cartItems)
-//   );
-
-//   this.totalAmount$ = this.cartItems$.pipe(
-//     map(items => items.reduce((total, item) => total + item.product.price * item.quantity, 0))
-//   );
-// }
-
-// increaseQty(item:any){
-//   item.quantity++;
-
-//   this.cartService.updateQuantity(item.id,item.quantity).subscribe(()=>{
-//     this.calculateTotal();
-//   });
-// }
-
-// decreaseQty(item:any){
-//   if(item.quantity > 1){
-//     item.quantity--;
-
-//     this.cartService.updateQuantity(item.id,item.quantity).subscribe(()=>{
-//       this.calculateTotal();
-//     });
-//   }
-// }
-
-// calculateTotal(){
-//   this.totalAmount = 0;
-
-//   this.cartItems.forEach(item=>{
-//     this.totalAmount += item.product.price * item.quantity;
-//   });
-// }
-
-
-
-  // remove(itemId:number){
-  //   this.cartService.removeItem(itemId).subscribe(()=>{
-  //     this.loadCart();
-  //   })
-  // }
-
   placeOrder() {
     const user = this.authService.getUser();
     if(!user) {
@@ -162,7 +102,6 @@ export class CartComponent implements OnInit {
     }
 
     this.router.navigate(['./payment']);
-    // this.loadCart(); //cart empty
   }
 
   

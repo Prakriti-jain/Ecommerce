@@ -27,14 +27,7 @@ export class Orders {
       alert("Login first");
       return;
     }
-
-    // this.orderService.getOrdersByUser(this.user.id).subscribe({
-    //   next:(res:any) => {
-    //     this.orders = res;
-    //     this.cd.detectChanges();
-    //   }
-    // });
-
+    
     this.orders$ = this.orderService.getOrdersByUser(this.user.id)
   }
 

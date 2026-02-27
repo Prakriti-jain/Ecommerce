@@ -11,11 +11,19 @@ export class UiState {
 
   setSearch(text: string) {
     this.searchText$.next(text.toLowerCase());
-
+    this.page$.next(1);
   }
 
   setSort(type: string) {
     this.sortType$.next(type);
     this.page$.next(1);
+  }
+
+  setPage(page : number) {
+    this.page$.next(page);
+  }
+
+  getCurrentPage() {
+    return this.page$.value;
   }
 }

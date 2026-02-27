@@ -23,15 +23,6 @@ export class OrderDetail {
 
   ngOnInit() {
     const orderId = this.route.snapshot.params['id'];
-    // this.orderService.getOrderDetail(orderId).subscribe({
-    //   next : (res:any) => {
-    //     this.order = res;
-    //     console.log(res);
-    //     this.cd.detectChanges();
-    //   }
-    // });
-
     this.order$ = this.orderService.getOrderDetail(orderId);
-
   }
 }

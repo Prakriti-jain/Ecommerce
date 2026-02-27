@@ -55,9 +55,6 @@ export class LoginComponent {
             this.errorMessage$.next("Wrong panel selected. Try " + res.role + " login.");
             return;
           }
-
-          // this.loggedUser = res;
-          // this.authService.setUser(res);
           this.errorMessage$.next('');
 
           //Role based redirect
@@ -92,44 +89,6 @@ export class LoginComponent {
     }
 
     const loginData: LoginRequest = this.loginForm.value;
-
     this.loginTrigger$.next(loginData);
-
-
-    // this.authService.login(loginData).subscribe({
-
-    //   next: (res: User) => {
-
-    //     // ROLE BASED CHECK
-    //     if (res.role !== this.selectedRole) {
-    //       console.log("error!!!")
-    //       this.errorMessage$.next("Wrong panel selected. Try " + res.role + " login.");
-    //       // this.cd.detectChanges();
-    //       return;
-    //     }
-
-    //     this.loggedUser = res;
-    //     this.authService.setUser(res);
-
-    //     this.errorMessage$.next('');
-
-    //     //Role based redirect
-    //     if(res.role === 'USER') {
-    //       this.router.navigate(['/']);
-    //     }
-
-    //     else if (res.role === 'ADMIN') {
-    //       this.router.navigate(['./admin']);
-    //     }
-
-    //     console.log("Logged in user:", res);
-
-    //   },
-
-    //   error: (err) => {
-    //     console.log("ERROR HIT");
-    //     this.errorMessage$.next(err.error?.message || "Login failed from server");
-    //   }
-    // });
   }
 }

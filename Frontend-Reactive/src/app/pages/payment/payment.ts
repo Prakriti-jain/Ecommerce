@@ -36,14 +36,7 @@ export class Payment implements OnInit {
   
   ngOnInit(): void {
     this.userId = this.auth.getUser()?.id;
-    // this.cartService.getCartItems(this.userId).subscribe(res=>{
-    //   this.cartItems = res.cartItems;
-    //   this.cartItems.forEach(i=>{
-    //     this.totalAmount += i.product.price * i.quantity;
-    //   })
-    //   this.cd.detectChanges();
-    // });
-
+    
     this.cartItems$ = this.cartService.getCartItems(this.userId).pipe(
       map(res => res.cartItems)
     );
@@ -65,19 +58,6 @@ export class Payment implements OnInit {
 
     )
   }
-
-  // payNow() {
-
-  //   this.orderService.placeOrder(this.userId).subscribe({
-  //     next:(res) => {
-  //       alert("Order placed successfully!");
-  //       this.router.navigate(['./order-success']);
-  //     },
-  //     error: (err) => {
-  //       alert(err.error.message || "Order failed");
-  //     }
-  //   });
-  // }
 
   payNow() {
     this.payTrigger$.next();

@@ -1,8 +1,3 @@
-<!-- <app-navbar>
-
-</app-navbar> -->
-<!-- <div *ngIf = "addToCartResult$ | async"> </div> -->
-
 <!-- HERO BANNER -->
 <div class="banner">
   <h1>Discover Latest Tech</h1>
@@ -25,12 +20,6 @@
     </div>
 
     <div class = "cart-stock">
-      <!-- <button 
-        class = "cart-btn"
-        [disabled] = "product.stock === 0"
-        (click) = "addToCart(product)">
-        Add to Cart
-      </button> -->
       <app-add-to-cart [product] = "product"></app-add-to-cart>
       
 
@@ -49,7 +38,7 @@
 
 <div class = "pagination">
   <app-pagination
-      [currentPage] = "(currentPage$ | async) ?? 1"
+      [currentPage] = "(ui.page$ | async) ?? 1"
       [totalPages] = "(totalPages$ | async) ?? 1"  
       (next)= "nextPage()"
       (prev)= "prevPage()">

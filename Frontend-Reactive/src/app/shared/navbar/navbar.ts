@@ -16,13 +16,11 @@ import { User } from '../../models/user.model';
 })
 export class Navbar {
 
-  // loggedUser : any;
   loggedUser$! : Observable<User | null>;
   showProfileMenu : boolean = false;
   cartCount$! : Observable<number>;
   showNavbar$! : Observable<boolean>;
 
-  // @Output() click = new EventEmitter<void>()
 
   constructor(
     private auth : AuthService, 
@@ -41,7 +39,6 @@ export class Navbar {
   }
 
   ngOnInit() {
-    // this.loggedUser = this.auth.getUser();
     this.loggedUser$ = this.auth.user$;
     this.cartCount$ = this.auth.user$.pipe(
       switchMap(user => {
@@ -55,7 +52,6 @@ export class Navbar {
     )
   }
 
-  
 
   onSearch(event : any) {
     this.ui.setSearch(event.target.value);

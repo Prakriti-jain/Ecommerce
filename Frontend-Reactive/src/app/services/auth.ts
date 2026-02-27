@@ -9,8 +9,6 @@ import { User } from '../models/user.model';
 })
 export class AuthService {
   private baseUrl = 'http://localhost:8080/auth'; //springboot url
-  // private currentUser : User | null = null;
-
   
   //one Behaviour Subject and one Observable so that no component can change the value of the user and can only access to observable 
   private userSubject = new BehaviorSubject<User | null> (this.getStoredUser()); 
@@ -32,11 +30,6 @@ export class AuthService {
       })
     );
   }
-
-  // setUser(user : User) {
-  //   this.currentUser = user;
-  //   localStorage.setItem('user', JSON.stringify(user));
-  // }
 
   getUser(){
     return this.userSubject.value;

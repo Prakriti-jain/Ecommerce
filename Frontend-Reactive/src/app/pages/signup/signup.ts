@@ -55,7 +55,6 @@ export class SignupComponent {
 
   signup() {
     if(this.signupForm.invalid) {
-      // this.signupForm.markAllAsTouched();
       this.errorMessage$.next("Invalid Form! Fill the Required fields")
       return;
     }
@@ -64,20 +63,6 @@ export class SignupComponent {
       ...this.signupForm.value,
       role:'USER'
     };
-
-    // console.log(payload);
-
-    // this.authService.signup(payload).subscribe({
-
-    //   next:(res)=>{
-    //     alert("Account created successfully!");
-    //     this.router.navigate(['/login']);
-    //   },
-
-    //   error:(err)=>{
-    //     this.errorMessage$.next(err.error?.message || err.error || "Signup failed");
-    //   }
-    // });
 
     this.signupTrigger$.next(payload)
   }

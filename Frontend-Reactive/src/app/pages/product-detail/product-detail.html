@@ -38,12 +38,6 @@
       <!-- ACTION BUTTONS -->
       <div class="actions">
 
-        <!-- <button class="cart-btn"
-                (click) = "addToCart(product)"
-                [disabled] = "product.stock===0">
-          Add to Cart
-        </button> -->
-
         <app-add-to-cart [product] = "product"></app-add-to-cart>
 
         <button class="buy-btn">
@@ -51,9 +45,6 @@
         </button>
 
       </div>
-
-    <!-- <div *ngIf = "addToCartResult$|async"> </div>
-      <span class="added" *ngIf = "added">✔ Added to cart</span> -->
 
     </div>
 

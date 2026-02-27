@@ -10,20 +10,71 @@
     <form [formGroup] = "form" (ngSubmit) = "update()">
 
       <div class="row">
-        <input formControlName="name" placeholder="Full Name">
-        <input formControlName="phone" placeholder="Phone Number">
+
+        <div class="form-group">
+          <input type="text" formControlName="name" placeholder = "Full name">
+          <div class = "error-form" *ngIf = "form.get('name')?.invalid && (form.get('name')?.touched || form.get('name')?.dirty)"> 
+            <span *ngIf = "form.get('name')?.errors?.['required']">
+              Name is required
+            </span>
+
+            <span *ngIf = "form.get('name')?.errors?.['minlength']">
+              Name should be atleast 3 characters long
+            </span>
+
+            <span *ngIf = "form.get('name')?.errors?.['pattern']">
+              Invalid Name!
+            </span>
+          </div>
+        </div>
+
+        <div class = "form-group">
+          <input formControlName="phone" placeholder="Phone Number" type="text">
+          <div class = "error-form" *ngIf ="form.get('phone')?.invalid && (form.get('phone')?.touched || form.get('phone')?.dirty)">
+            Enter valid 10 digit number
+          </div>
+        </div>
+
       </div>
 
       <div class="row">
-        <input formControlName="gender" placeholder="Gender">
-        <input formControlName="dob" type="date">
+        <div class = "form-group">
+          <select formControlName="gender">
+              <option value="">Select</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
+            </select>
+
+            <div class = "error-form" *ngIf = "form.get('gender')?.invalid && (form.get('gender')?.touched || form.get('gender')?.dirty)"> 
+              Select Gender
+            </div>
+        </div>
+
+        <div class="form-group">
+          <input type="date" formControlName="dob" placeholder = "DOB">
+          <div class = "error-form" *ngIf = "form.get('dob')?.invalid && (form.get('dob')?.touched || form.get('dob')?.dirty)"> 
+            DOB is required
+          </div>
+        </div>
       </div>
 
-      <textarea formControlName="address" placeholder="Address"></textarea>
+      <div class="form-group">
+        <textarea formControlName="address" placeholder = "Address"></textarea>
+        <div class = "error-form" *ngIf = "form.get('address')?.invalid && (form.get('address')?.touched || form.get('address')?.dirty)">
+          Address is required
+        </div>
+      </div>
 
       <button type="submit">Save Changes</button>
 
     </form>
+
+        <div *ngIf = "updateResults$ | async"></div>
+
+    <p class="error" *ngIf = "errorMessage$ | async as errorMessage">
+      {{errorMessage }}
+    </p>
 
   </div>
 

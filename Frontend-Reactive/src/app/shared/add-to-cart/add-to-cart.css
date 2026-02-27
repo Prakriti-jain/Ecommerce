@@ -20,6 +20,6 @@ button:disabled {
   cursor: not-allowed;
 }
 
-button:hover {
+button:not(:disabled):hover {
   background: #428573;
 }
