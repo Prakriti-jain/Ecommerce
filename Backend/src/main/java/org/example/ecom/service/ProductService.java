@@ -1,5 +1,6 @@
 package org.example.ecom.service;
 
+import org.example.ecom.exceptions.ResourceNotFoundException;
 import org.example.ecom.model.Product;
 import org.example.ecom.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,17 +66,18 @@ public class ProductService {
      * @param id ID of the product to update
      * @param updatedProduct product object containing updated fields
      * @return updated Product object
-     * @throws RuntimeException if the product does not exist
+     * @throws ResourceNotFoundException if the product does not exist
      */
     public Product updateProduct(Long id, Product updatedProduct) {
         Product product = repo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
 
         product.setName(updatedProduct.getName());
         product.setDescription(updatedProduct.getDescription());
         product.setPrice(updatedProduct.getPrice());
         product.setStock(updatedProduct.getStock());
         product.setAvailable(updatedProduct.isAvailable());
+        product.setImageUrl(updatedProduct.getImageUrl());
 
         return repo.save(product);
     }

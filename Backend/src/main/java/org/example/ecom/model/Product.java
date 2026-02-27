@@ -20,25 +20,19 @@ public class Product {
     private String image_url;
 
     // One product → many cart items
-    @OneToMany(mappedBy = "product")
-    @JsonIgnore
-    private List<CartItems> cartItems;
+//    @OneToMany(mappedBy = "product")
+//    @JsonIgnore
+//    private List<CartItems> cartItems;
 
-    public String getImageUrl() {
-        return image_url;
-    }
 
-    public void setImageUrl(String imageUrl) {
-        this.image_url = imageUrl;
-    }
 
-    public List<CartItems> getCartItems() {
-        return cartItems;
-    }
-
-    public void setCartItems(List<CartItems> cartItems) {
-        this.cartItems = cartItems;
-    }
+//    public List<CartItems> getCartItems() {
+//        return cartItems;
+//    }
+//
+//    public void setCartItems(List<CartItems> cartItems) {
+//        this.cartItems = cartItems;
+//    }
 
     public Long getId() { return id; }
 
@@ -84,5 +78,13 @@ public class Product {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public String getImageUrl() {
+        return image_url;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.image_url = imageUrl;
     }
 }

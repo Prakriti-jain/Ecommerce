@@ -1,6 +1,8 @@
 package org.example.ecom.service;
 
 import jakarta.transaction.Transactional;
+import org.example.ecom.exceptions.InventoryException;
+import org.example.ecom.exceptions.ResourceNotFoundException;
 import org.example.ecom.model.*;
 import org.example.ecom.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,15 +47,16 @@ public class OrderService {
      *
      * @param userId ID of the user placing the order
      * @return saved Order object
-     * @throws RuntimeException if user/cart not found or insufficient stock
+     * @throws ResourceNotFoundException if user/cart not found
+     * @throws InventoryException if insufficient stock
      */
     @Transactional
     public Order placeOrder(Long userId) {
         User user = userRepo.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
         Cart cart = cartRepo.findCartByUser(user)
-                .orElseThrow(() -> new RuntimeException("Cart not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Cart not found"));
 
         Order order = new Order();
         order.setUser(user);
@@ -76,7 +79,7 @@ public class OrderService {
             //reduce stock
             Product product = item.getProduct();
             if (product.getStock() < item.getQuantity()) {
-                throw new RuntimeException("Not enough stock for product " + product.getName());
+                throw new InventoryException("Not enough stock for product " + product.getName());
             }
             product.setStock(product.getStock() - item.getQuantity());
             productRepo.save(product);
@@ -99,10 +102,10 @@ public class OrderService {
      *
      * @param userId ID of the user
      * @return list of orders associated with the user
-     * @throws RuntimeException if user is not found
+     * @throws ResourceNotFoundException if user is not found
      */
     public List<Order> getOrdersByUser(Long userId) {
-        User user = userRepo.findById(userId).orElseThrow(() -> new RuntimeException("User not found!"));
+        User user = userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not found!"));
 
         return orderRepo.findOrderByUser(user);
     }
@@ -112,11 +115,11 @@ public class OrderService {
      *
      * @param orderId ID of the order
      * @return Order object with associated order items
-     * @throws RuntimeException if order is not found
+     * @throws ResourceNotFoundException if order is not found
      */
     public Order getOrderDetails(Long orderId) {
 //        Order order = orderRepo.findById(orderId).get();
 //        System.out.println(order.getOrderItemList().size());
-        return orderRepo.findById(orderId).orElseThrow(() -> new RuntimeException("Order not found!"));
+        return orderRepo.findById(orderId).orElseThrow(() -> new ResourceNotFoundException("Order not found!"));
     }
 }

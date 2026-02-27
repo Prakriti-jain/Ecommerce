@@ -1,6 +1,7 @@
 package org.example.ecom.service;
 
 import jakarta.transaction.Transactional;
+import org.example.ecom.exceptions.ResourceNotFoundException;
 import org.example.ecom.model.Cart;
 import org.example.ecom.model.CartItems;
 import org.example.ecom.model.Product;
@@ -41,10 +42,10 @@ public class CartService {
      *
      * @param userId ID of the user
      * @return existing or newly created Cart object
-     * @throws RuntimeException if the user does not exist
+     * @throws ResourceNotFoundException if the user does not exist
      */
     public Cart getCartbyUser(Long userId) {
-        User user = userRepo.findById(userId).orElseThrow(() -> new RuntimeException("User not Found!"));
+        User user = userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User not Found!"));
 
         return cartRepo.findCartByUser(user).orElseGet(() -> {
             Cart newCart = new Cart();
@@ -61,11 +62,11 @@ public class CartService {
      * @param productId ID of the product to add
      * @param quantity quantity of the product
      * @return saved CartItems object
-     * @throws RuntimeException if product is not found
+     * @throws ResourceNotFoundException if product is not found
      */
     public CartItems addProductToCart(Long userId, Long productId, int quantity) {
         Cart cart = getCartbyUser(userId);
-        Product product = productRepo.findById(productId).orElseThrow(() -> new RuntimeException("Product not Found!"));
+        Product product = productRepo.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Product not Found!"));
 
         CartItems item = new CartItems();
         item.setCart(cart);
@@ -81,12 +82,12 @@ public class CartService {
      * Breaks cart reference in CartItems entity
      *
      * @param itemId ID of the cart item to remove
-     * @throws RuntimeException if the item does not exist
+     * @throws ResourceNotFoundException if the item does not exist
      */
     public void removeFromCart(Long itemId) {
 
         CartItems item = cartItemRepo.findById(itemId)
-                .orElseThrow(() -> new RuntimeException("Item not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Item not found"));
 
         Cart cart = item.getCart();
         cart.getCartItems().remove(item);
@@ -113,12 +114,12 @@ public class CartService {
      * @param itemId ID of the cart item
      * @param quantity new quantity value
      * @return updated CartItems object
-     * @throws RuntimeException if the item does not exist
+     * @throws ResourceNotFoundException if the item does not exist
      */
     public CartItems updateQuantity(Long itemId, int quantity){
 
         CartItems item = cartItemRepo.findById(itemId)
-                .orElseThrow(() -> new RuntimeException("Item not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Item not found"));
 
         item.setQuantity(quantity);
 

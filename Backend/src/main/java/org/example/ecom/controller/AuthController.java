@@ -1,36 +1,35 @@
 package org.example.ecom.controller;
 
+import org.example.ecom.requestBodyModel.LoginRequest;
 import org.example.ecom.model.User;
 import org.example.ecom.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class AuthController {
     @Autowired
-    private UserService service;
+    private UserService userService;
 
     @PostMapping("/login")
-    public User login(@RequestBody Map<String, String> data) {
-        String username = data.get("username");
-        String password = data.get("password");
+    public User login(@RequestBody LoginRequest data) {
+        String username = data.getUsername();
+        String password = data.getPassword();
 
-        return service.login(username, password);
+        return userService.login(username, password);
     }
 
     @PostMapping("/signup")
     public User signup(@RequestBody User user) {
-        return service.register(user);
+        return userService.register(user);
     }
 
     @PutMapping("/update/{id}")
     public User updateUser(@PathVariable Long id, @RequestBody User updated){
 
-        return service.updateUser(id, updated);
+        return userService.updateUser(id, updated);
     }
 
 }

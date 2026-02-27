@@ -1,45 +1,44 @@
 package org.example.ecom.controller;
 
+import org.example.ecom.requestBodyModel.AddToCartRequest;
 import org.example.ecom.model.Cart;
 import org.example.ecom.model.CartItems;
+import org.example.ecom.requestBodyModel.UpdateCartRequest;
 import org.example.ecom.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
-
 @RestController
 @RequestMapping("/cart")
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class CartController {
     @Autowired
-    private CartService service;
+    private CartService cartService;
 
     @PostMapping("/add")
-    public CartItems addToCart(@RequestBody Map<String, Object> data) {
+    public CartItems addToCart(@RequestBody AddToCartRequest data) {
 
-        Long userId = Long.valueOf(data.get("userId").toString());
-        Long productId = Long.valueOf(data.get("productId").toString());
-        int quantity = Integer.parseInt(data.get("quantity").toString());
+        Long userId = data.getUserId();
+        Long productId = data.getProductId();
+        int quantity = data.getQuantity();
 
-        return service.addProductToCart(userId, productId, quantity);
+        return cartService.addProductToCart(userId, productId, quantity);
     }
 
     @GetMapping("/{userId}")
     public Cart getCartItems(@PathVariable Long userId) {
-        return service.getCartItems(userId);
+        return cartService.getCartItems(userId);
     }
 
     @DeleteMapping("/item/{itemId}")
     public void removeItem(@PathVariable Long itemId) {
-        service.removeFromCart(itemId);
+        cartService.removeFromCart(itemId);
     }
 
     @PutMapping("/item/{itemId}")
-    public CartItems updateQuantity(@PathVariable Long itemId, @RequestBody Map<String,Integer> body) {
-        int qty = body.get("quantity");
-        return service.updateQuantity(itemId, qty);
+    public CartItems updateQuantity(@PathVariable Long itemId, @RequestBody UpdateCartRequest body) {
+        int qty = body.getQuantity();
+        return cartService.updateQuantity(itemId, qty);
     }
 
 }
